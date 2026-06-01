@@ -430,7 +430,37 @@
 	\end{block}
 \end{frame}
 
-
+%================= SLIDE 17 =================
+\begin{frame}{Phương trình biên quyết định}
+	\small
+	\setlength{\abovedisplayskip}{2pt}
+	\setlength{\belowdisplayskip}{2pt}
+	
+	Từ phương trình (20), xét các điểm \(\bsx_{\text{bnd}}\) nằm trên đường biên
+	\[
+	\bsx_{\text{bnd}}^T\widehat{\Sigma}^{-1}(\widehat{\bm{\mu}}_1-\widehat{\bm{\mu}}_2)
+	- \frac{1}{2} \left( \widehat{\bm{\mu}}_1^T\widehat{\Sigma}^{-1}\widehat{\bm{\mu}}_1 - \widehat{\bm{\mu}}_2^T\widehat{\Sigma}^{-1}\widehat{\bm{\mu}}_2 \right) = 0.
+	\]
+	
+	Do \(\widehat{\Sigma}^{-1}\) là ma trận đối xứng, ta có
+	\[
+	\widehat{\bm{\mu}}_1^T\widehat{\Sigma}^{-1}\widehat{\bm{\mu}}_1 - \widehat{\bm{\mu}}_2^T\widehat{\Sigma}^{-1}\widehat{\bm{\mu}}_2
+	=
+	(\widehat{\bm{\mu}}_1 + \widehat{\bm{\mu}}_2)^T \widehat{\Sigma}^{-1} (\widehat{\bm{\mu}}_1 - \widehat{\bm{\mu}}_2).
+	\]
+	
+	Thay vào phương trình trên và nhóm nhân tử chung, ta được
+	\[
+	\left( \bm{x}_{\text{bnd}} - \frac{\widehat{\bm{\mu}}_1 + \widehat{\bm{\mu}}_2}{2} \right)^T \widehat{\Sigma}^{-1} (\widehat{\bm{\mu}}_1 - \widehat{\bm{\mu}}_2) = 0.
+	\]
+	
+	\vspace{-1.5mm} % Ép khoảng cách thừa
+	\begin{block}{Biên phân loại theo \(\bm{b}_{\text{opt}}\)}
+		\[
+		\bm{b}_{\text{opt}}^T \left( \bsx_{\text{bnd}} - \frac{\widehat{\bm{\mu}}_1 + \widehat{\bm{\mu}}_2}{2} \right) = 0.
+		\]
+	\end{block}
+\end{frame}
 
 %================= SLIDE 17 =================
 \begin{frame}{Đánh giá kết quả phân loại}
@@ -546,15 +576,15 @@ Trong đó, \(n_{ij}\) là số quan sát được dự báo vào lớp \(\wideh
 	\widehat{\mu}_2=5{,}552\ \text{cm},\quad s_2^2=0{,}3046\ \text{cm}^2.
 	\]
 	
-	Phương sai mẫu gộp:
-	\[
-	s_p^2
-	=
-	\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}
-	=
-	\frac{49(0{,}2208)+49(0{,}3046)}{98}
-	\approx 0{,}2627\ \text{cm}^2.
-	\]
+%	Phương sai mẫu gộp:
+%	\[
+%	s_p^2
+%	=
+%	\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}
+%	=
+%	\frac{49(0{,}2208)+49(0{,}3046)}{98}
+%	\approx 0{,}2627\ \text{cm}^2.
+%	\]
 	
 	Vì \(\widehat{\pi}_1=\widehat{\pi}_2\), ngưỡng LDA là trung điểm hai trung bình:
 	\[
@@ -671,15 +701,6 @@ Trong đó, \(n_{ij}\) là số quan sát được dự báo vào lớp \(\wideh
 	\widehat{\mu}_2=4{,}260\ \text{cm},\quad s_2^2=0{,}2208\ \text{cm}^2.
 	\]
 	
-	Phương sai mẫu gộp:
-	\[
-	s_p^2
-	=
-	\frac{49(0{,}0302)+49(0{,}2208)}{98}
-	\approx
-	0{,}1255\ \text{cm}^2.
-	\]
-	
 	Vì \(\widehat{\pi}_1=\widehat{\pi}_2\), ngưỡng LDA là
 	\[
 	x_{\text{bnd}}
@@ -687,6 +708,14 @@ Trong đó, \(n_{ij}\) là số quan sát được dự báo vào lớp \(\wideh
 	\frac{1{,}462+4{,}260}{2}
 	=
 	2{,}861\ \text{cm}.
+	\]
+	\[
+	\widehat{G}(x)
+	=
+	\begin{cases}
+		C_1, & x\le 2{,}861\ \text{cm},\\
+		C_2, & x>2{,}861\ \text{cm}.
+	\end{cases}
 	\]
 	
 \end{frame}
