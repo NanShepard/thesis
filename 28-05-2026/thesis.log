@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.21)  1 JUN 2026 15:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.21)  1 JUN 2026 16:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1299,11 +1299,7 @@ File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 Package babel Info: 'vietnamese' activates 'vietnamese' shorthands.
 (babel)             Reported on input line 8.
  (chapter/chapter1-chuanbikienthuc.aux)
-(chapter/chapter2-LDAtrongphanloaihailop.aux
-
-LaTeX Warning: Label `tab:metrics_summary' multiply defined.
-
-) (chapter/chapter3-Ketluan.aux))
+(chapter/chapter2-LDAtrongphanloaihailop.aux) (chapter/chapter3-Ketluan.aux))
 \openout1 = `thesis.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 94.
@@ -1327,7 +1323,8 @@ LaTeX Font Info:    ... okay on input line 94.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 94.
 LaTeX Font Info:    ... okay on input line 94.
 Package hyperref Info: Link coloring OFF on input line 94.
- (thesis.out) (thesis.out)
+
+(thesis.out) (thesis.out)
 \@outlinefile=\write4
 \openout4 = `thesis.out'.
 
@@ -1788,18 +1785,14 @@ File: t5lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
-
-
-LaTeX Warning: There were multiply-defined labels.
-
 Package rerunfilecheck Info: File `thesis.out' has not changed.
 (rerunfilecheck)             Checksum: 75C21C7AD4D4F597B15D28550A92882A;8468.
  ) 
 Here is how much of TeX's memory you used:
- 28580 strings out of 467871
- 551178 string characters out of 5416440
- 938649 words of memory out of 5000000
- 56696 multiletter control sequences out of 15000+600000
+ 28581 strings out of 467871
+ 551200 string characters out of 5416440
+ 938727 words of memory out of 5000000
+ 56697 multiletter control sequences out of 15000+600000
  793744 words of font info for 113 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  102i,18n,107p,2477b,620s stack positions out of 10000i,1000n,20000p,200000b,200000s
