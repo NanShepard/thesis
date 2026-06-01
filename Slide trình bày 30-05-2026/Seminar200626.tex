@@ -51,7 +51,19 @@
 	\end{frame}
 	
 	%================= SLIDE 2 =================
-	\begin{frame}{Nội dung trình bày}
+	\begin{frame}{Mục tiêu của đề tài}
+		\begin{itemize}
+			\item Trình bày cơ sở lý thuyết của phương pháp LDA.
+			\item Làm rõ ý tưởng hình học trong tiếp cận của Fisher.
+			\item Xây dựng hàm phân biệt LDA theo lý thuyết Bayes.
+			\item Chỉ ra sự tương đồng giữa hai cách tiếp cận.
+			\item Minh họa phương pháp LDA của Fisher trên dữ liệu Iris và dữ liệu mô phỏng.
+		\end{itemize}
+	\end{frame}
+
+	
+	%================= SLIDE 3 =================
+		\begin{frame}{Nội dung trình bày}
 		\begin{enumerate}
 			\item Giới thiệu bài toán phân loại mẫu thống kê.
 			\item Tiếp cận LDA của Fisher.
@@ -61,17 +73,6 @@
 			\item Minh họa hai chiều trên dữ liệu mô phỏng.
 			\item Kết luận và hướng phát triển.
 		\end{enumerate}
-	\end{frame}
-	
-	%================= SLIDE 3 =================
-	\begin{frame}{Mục tiêu của đề tài}
-		\begin{itemize}
-			\item Trình bày cơ sở lý thuyết của phương pháp LDA.
-			\item Làm rõ ý tưởng hình học trong tiếp cận của Fisher.
-			\item Xây dựng hàm phân biệt LDA theo lý thuyết Bayes.
-			\item Chỉ ra sự tương đồng giữa hai cách tiếp cận.
-			\item Minh họa phương pháp LDA của Fisher trên dữ liệu Iris và dữ liệu mô phỏng.
-		\end{itemize}
 	\end{frame}
 	
 
@@ -358,12 +359,12 @@
 	\begin{equation}
 		\delta_k(\bsx)
 		=
-		-\frac{1}{2}\log|\Sigma|
+		-\frac{1}{2}\ln|\Sigma|
 		-\frac{1}{2}
 		(\bsx-\bm{\mu}_k)^T
 		\Sigma^{-1}
 		(\bsx-\bm{\mu}_k)
-		+\log\pi_k.
+		+\ln\pi_k.
 		\tag{16}
 	\end{equation}
 	
@@ -376,7 +377,7 @@
 		\frac{1}{2}
 		\bm{\mu}_k^T\Sigma^{-1}\bm{\mu}_k
 		+
-		\log\pi_k.
+		\ln\pi_k.
 		\tag{17}
 	\end{equation}
 \end{frame}
@@ -400,11 +401,11 @@
 	\bm{\mu}_2^T\Sigma^{-1}\bm{\mu}_2
 	\right)
 	+
-	\log\frac{\pi_1}{\pi_2}
+	\ln\frac{\pi_1}{\pi_2}
 	=0. \tag{19}
 	\]
 	
-	Nếu \(\pi_1=\pi_2\), thì \(\log\dfrac{\pi_1}{\pi_2}=0\).
+	Nếu \(\pi_1=\pi_2\), thì \(\ln\dfrac{\pi_1}{\pi_2}=0\).
 	
 	Trong thực nghiệm
 	\[
@@ -789,16 +790,15 @@ Trong đó, \(n_{ij}\) là số quan sát được dự báo vào lớp \(\wideh
 	
 	\textbf{2. Biên LDA lý thuyết}
 	\[
-	\bm{b}_{\text{lt}}
+	\bm{\beta}_{\text{opt}}
 	=
 	\Sigma^{-1}(\bm{\mu}_1-\bm{\mu}_2)
 	=
 	\begin{pmatrix}
 		-2\\
 		-2
-	\end{pmatrix}.
-	\]
-	\[
+	\end{pmatrix},
+	\qquad
 	\frac{\bm{\mu}_1+\bm{\mu}_2}{2}
 	=
 	\begin{pmatrix}
@@ -807,7 +807,7 @@ Trong đó, \(n_{ij}\) là số quan sát được dự báo vào lớp \(\wideh
 	\end{pmatrix}.
 	\]
 	\[
-	\bm{b}_{\text{lt}}^T
+	\bm{\beta}_{\text{opt}}^T
 	\left(
 	\bm{x}_{\text{bnd}}
 	-
@@ -815,10 +815,11 @@ Trong đó, \(n_{ij}\) là số quan sát được dự báo vào lớp \(\wideh
 	\right)
 	=0
 	\quad \Rightarrow \quad
-	-2x_1-2x_2+14=0.
+	-2x_1-2x_2+14=0
 	\]
 	\[
-	x_2=7-x_1.
+	\Rightarrow \quad
+	\boxed{x_2=7-x_1}.
 	\]
 	
 	\textbf{3. Biên LDA thực nghiệm từ dữ liệu mẫu}
@@ -828,20 +829,19 @@ Trong đó, \(n_{ij}\) là số quan sát được dự báo vào lớp \(\wideh
 		3{,}0345\\
 		2{,}9611
 	\end{pmatrix},
-	\qquad
+	\quad
 	\widehat{\bm{\mu}}_2=
 	\begin{pmatrix}
 		4{,}0687\\
 		3{,}9000
 	\end{pmatrix},
-	\qquad
+	\quad
 	\widehat{\Sigma}=
 	\begin{pmatrix}
 		2{,}2449 & -1{,}7388\\
 		-1{,}7388 & 2{,}2465
 	\end{pmatrix}.
 	\]
-	
 	\[
 	\bm{b}_{\text{opt}}
 	=
@@ -853,11 +853,20 @@ Trong đó, \(n_{ij}\) là số quan sát được dự báo vào lớp \(\wideh
 		-1{,}9340
 	\end{pmatrix}.
 	\]
-	
 	\[
+	\bm{b}_{\text{opt}}^T
+	\left(
+	\bm{x}_{\text{bnd}}
+	-
+	\frac{\widehat{\bm{\mu}}_1+\widehat{\bm{\mu}}_2}{2}
+	\right)
+	=0
+	\quad \Rightarrow \quad
 	-1{,}9587x_1-1{,}9340x_2+13{,}5912=0
-	\quad \Leftrightarrow \quad
-	x_2=7{,}0276-1{,}0128x_1.
+	\]
+	\[
+	\Rightarrow \quad
+	\boxed{x_2=7{,}0276-1{,}0128x_1}.
 	\]
 \end{frame}
 
@@ -938,7 +947,7 @@ Trong đó, \(n_{ij}\) là số quan sát được dự báo vào lớp \(\wideh
 	
 	\textbf{2. Biên LDA lý thuyết}
 	\[
-	\bm{b}_{\text{lt}}
+	\bm{\beta}_{\text{opt}}
 	=
 	\Sigma^{-1}(\bm{\mu}_1-\bm{\mu}_2)
 	=
@@ -954,11 +963,20 @@ Trong đó, \(n_{ij}\) là số quan sát được dự báo vào lớp \(\wideh
 		2{,}75
 	\end{pmatrix}.
 	\]
-	
 	\[
+	\bm{\beta}_{\text{opt}}^T
+	\left(
+	\bm{x}_{\text{bnd}}
+	-
+	\frac{\bm{\mu}_1+\bm{\mu}_2}{2}
+	\right)
+	=0
+	\quad \Rightarrow \quad
 	-0{,}3x_1+0{,}4x_2-0{,}17=0
-	\quad \Leftrightarrow \quad
-	x_2=0{,}425+0{,}75x_1.
+	\]
+	\[
+	\Rightarrow \quad
+	\boxed{x_2=0{,}425+0{,}75x_1}.
 	\]
 	
 	\textbf{3. Biên LDA thực nghiệm từ dữ liệu mẫu}
@@ -968,20 +986,19 @@ Trong đó, \(n_{ij}\) là số quan sát được dự báo vào lớp \(\wideh
 		2{,}9716\\
 		3{,}0225
 	\end{pmatrix},
-	\qquad
+	\quad
 	\widehat{\bm{\mu}}_2=
 	\begin{pmatrix}
 		3{,}2101\\
 		2{,}5101
 	\end{pmatrix},
-	\qquad
+	\quad
 	\widehat{\Sigma}=
 	\begin{pmatrix}
 		1{,}9507 & 0{,}8710\\
 		0{,}8710 & 1{,}9595
 	\end{pmatrix}.
 	\]
-	
 	\[
 	\bm{b}_{\text{opt}}
 	=
@@ -993,11 +1010,20 @@ Trong đó, \(n_{ij}\) là số quan sát được dự báo vào lớp \(\wideh
 		0{,}3940
 	\end{pmatrix}.
 	\]
-	
 	\[
+	\bm{b}_{\text{opt}}^T
+	\left(
+	\bm{x}_{\text{bnd}}
+	-
+	\frac{\widehat{\bm{\mu}}_1+\widehat{\bm{\mu}}_2}{2}
+	\right)
+	=0
+	\quad \Rightarrow \quad
 	-0{,}2982x_1+0{,}3940x_2-0{,}1684=0
-	\quad \Leftrightarrow \quad
-	x_2=0{,}4274+0{,}7567x_1.
+	\]
+	\[
+	\Rightarrow \quad
+	\boxed{x_2=0{,}4274+0{,}7567x_1}.
 	\]
 \end{frame}
 
@@ -1071,66 +1097,83 @@ Trong đó, \(n_{ij}\) là số quan sát được dự báo vào lớp \(\wideh
 	\]
 	
 	\textbf{2. Biên LDA lý thuyết}
+	\begin{columns}[T]
+		\begin{column}{0.5\textwidth}
+			Vì \(\Sigma=2I\), hai lớp có cùng phương sai theo hai hướng và không tương quan. Biên LDA lý thuyết là đường trung trực của đoạn nối hai tâm:
+			\[
+			\bm{\beta}_{\text{opt}} = \begin{pmatrix} -5\\ 0 \end{pmatrix}, \quad
+			\frac{\bm{\mu}_1+\bm{\mu}_2}{2} = \begin{pmatrix} 8\\ 3 \end{pmatrix}.
+			\]
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			Áp dụng công thức đường biên:
+			\[
+			\bm{\beta}_{\text{opt}}^T
+			\left(
+			\bm{x}_{\text{bnd}} - \frac{\bm{\mu}_1+\bm{\mu}_2}{2}
+			\right)
+			=0
+			\]
+			\[
+			\Rightarrow \quad -5x_1+40=0 \quad \Rightarrow \quad \boxed{x_1=8}.
+			\]
+		\end{column}
+	\end{columns}
 	
-	Vì \(\Sigma=2I\), hai lớp có cùng phương sai theo hai hướng và không tương quan.
-	Do đó, biên LDA lý thuyết là đường trung trực của đoạn nối hai tâm:
-	\[
-	\frac{\bm{\mu}_1+\bm{\mu}_2}{2}
-	=
-	\begin{pmatrix}
-		8\\
-		3
-	\end{pmatrix}.
-	\]
-	
-	Vì hai tâm chỉ khác nhau theo trục \(x_1\), biên lý thuyết là
-	\[
-	x_1=8.
-	\]
-	
-	\textbf{3. Biên LDA thực nghiệm từ dữ liệu mẫu}
-	\[
-	\widehat{\bm{\mu}}_1=
-	\begin{pmatrix}
-		2{,}9491\\
-		2{,}9966
-	\end{pmatrix},
-	\qquad
-	\widehat{\bm{\mu}}_2=
-	\begin{pmatrix}
-		12{,}9999\\
-		3{,}0117
-	\end{pmatrix},
-	\qquad
-	\widehat{\Sigma}=
-	\begin{pmatrix}
-		2{,}1682 & -0{,}0051\\
-		-0{,}0051 & 1{,}8841
-	\end{pmatrix}.
-	\]
-	
-	\[
-	\bm{b}_{\text{opt}}
-	=
-	\widehat{\Sigma}^{-1}
-	(\widehat{\bm{\mu}}_1-\widehat{\bm{\mu}}_2)
-	=
-	\begin{pmatrix}
-		-4{,}6356\\
-		-0{,}0205
-	\end{pmatrix}.
-	\]
-	
-	\[
-	-4{,}6356x_1-0{,}0205x_2+37{,}0283=0.
-	\]
-	
-	Vì hệ số của \(x_2\) rất nhỏ nên biên thực nghiệm gần như là đường thẳng đứng:
-	\[
-	x_1\approx 7{,}9878.
-	\]
+	\vspace{2mm} % Thêm khoảng trắng nhỏ giữa 2 phần cho thoáng
+\textbf{3. Biên LDA thực nghiệm từ dữ liệu mẫu}
+\begin{columns}[T]
+	\begin{column}{0.5\textwidth}
+		\[
+		\widehat{\bm{\mu}}_1=
+		\begin{pmatrix}
+			2{,}9491\\
+			2{,}9966
+		\end{pmatrix},
+		\quad
+		\widehat{\bm{\mu}}_2=
+		\begin{pmatrix}
+			12{,}9999\\
+			3{,}0117
+		\end{pmatrix}
+		\]
+		\[
+		\widehat{\Sigma}=
+		\begin{pmatrix}
+			2{,}1682 & -0{,}0051\\
+			-0{,}0051 & 1{,}8841
+		\end{pmatrix}.
+		\]
+	\end{column}
+	\begin{column}{0.5\textwidth}
+		\[
+		\bm{b}_{\text{opt}}
+		=
+		\begin{pmatrix}
+			-4{,}6356\\
+			-0{,}0205
+		\end{pmatrix}.
+		\]
+		\[
+		\bm{b}_{\text{opt}}^T
+		\left(
+		\bm{x}_{\text{bnd}}
+		-
+		\frac{\widehat{\bm{\mu}}_1+\widehat{\bm{\mu}}_2}{2}
+		\right)
+		=0
+		\]
+		\[
+		\Rightarrow \quad -4{,}6356x_1-0{,}0205x_2+37{,}0283=0.
+		\]
+		Vì hệ số của \(x_2\) rất nhỏ nên biên thực nghiệm gần như là đường thẳng đứng:
+		\[
+		\Rightarrow \quad
+		\boxed{x_1\approx 7{,}9878}.
+		\]
+	\end{column}
+\end{columns}
 \end{frame}
-
 
 %================= SLIDE 27 =================
 \begin{frame}[t]{Mô phỏng hai chiều: Hai lớp tách biệt hoàn toàn}

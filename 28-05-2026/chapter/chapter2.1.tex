@@ -59,7 +59,7 @@ Do đó phương trình\eqref{eq:immmm} thành,
 0.
 \]
 
-Suy ra
+Suy ra phương trình biên tách biệt có dạng
 \begin{equation}
 	\bm{\beta}_{\text{opt}}^T
 	\left(
@@ -99,7 +99,7 @@ Khi đó, phương chiếu Fisher thực nghiệm được xác định bởi
 \hat{\Sigma}^{-1}(\hat{\bm{\mu}}_1-\hat{\bm{\mu}}_2).
 \]
 
-Hàm phân biệt thực nghiệm thỏa phương trình
+Hàm tách biệt thực nghiệm thỏa phương trình
 \begin{equation}
 	\bm{b}_{\text{opt}}^T
 	\left(
@@ -340,18 +340,15 @@ Vectơ trung bình mẫu của hai lớp lần lượt là
 \end{pmatrix}.
 \]
 
-Ma trận hiệp phương sai mẫu của lớp thứ nhất là
+Ma trận hiệp phương sai mẫu của lớp thứ nhất và lớp thứ hai lần lượt là
 \[
 \hat{\Sigma}_1
 =
 \begin{pmatrix}
 	2{,}1348 & -1{,}6155\\
 	-1{,}6155 & 2{,}1642
-\end{pmatrix}.
-\]
-
-Ma trận hiệp phương sai mẫu của lớp thứ hai là
-\[
+\end{pmatrix},
+\qquad
 \hat{\Sigma}_2
 =
 \begin{pmatrix}
@@ -566,53 +563,30 @@ Tỷ lệ lỗi thực nghiệm (Tỷ lệ phân loại lỗi - $\widehat{\mathr
 =
 0{,}830 \quad (83{,}0\%).
 \]
-Độ chính xác của thủ tục phân loại (hay Recall), đối với lớp $C_1$ là
-\[
-P(\hat{C}_1\mid C_1)
-=
-\frac{n_{11}}{n_{\bullet 1}}
-=
-\frac{412}{500}
-=
-0{,}824
-\quad (82{,}4\%).
-\]
+Các chỉ số độ chính xác phân loại (Recall) và độ chính xác tiên đoán (Precision) cho từng lớp $C_j$ ($j = 1, 2$) được xác định theo các công thức
+\begin{itemize}
+	\item \textbf{Recall:} $P(\hat{C}_j\mid C_j) = \frac{n_{jj}}{n_{\bullet j}}$
+	\item \textbf{Precision:} $P(C_j\mid \hat{C}_j) = \frac{n_{jj}}{n_{j\bullet}}$
+\end{itemize}
 
-Độ chính xác của thủ tục phân loại, đối với lớp $C_2$ là
-\[
-P(\hat{C}_2\mid C_2)
-=
-\frac{n_{22}}{n_{\bullet 2}}
-=
-\frac{418}{500}
-=
-0{,}836
-\quad (83{,}6\%).
-\]
+Kết quả tính toán cụ thể được tóm tắt trong Bảng \ref{tab:metrics_summary}
 
-Độ chính xác tiên đoán (hay Precision), đối với lớp $C_1$ là
-\[
-P(C_1\mid \hat{C}_1)
-=
-\frac{n_{11}}{n_{1\bullet}}
-=
-\frac{412}{494}
-\approx
-0{,}8340
-\quad (83{,}40\%).
-\]
+\begin{table}[H]
+	\centering
+	\renewcommand{\arraystretch}{1.5}
+	\begin{tabular}{|c|c|c|}
+		\hline
+		\textbf{Lớp} & \textbf{Recall} $P(\hat{C}_j \mid C_j)$ & \textbf{Precision} $P(C_j \mid \hat{C}_j)$ \\
+		\hline
+		\textbf{$C_1$} & $\frac{412}{500} = 82{,}4\%$ & $\frac{412}{494} \approx 83{,}40\%$ \\
+		\hline
+		\textbf{$C_2$} & $\frac{418}{500} = 83{,}6\%$ & $\frac{418}{506} \approx 82{,}61\%$ \\
+		\hline
+	\end{tabular}
+	\caption{Các chỉ số Recall và Precision cho trường hợp hai lớp ít chồng lấp}
+	\label{tab:metrics_summary}
+\end{table}
 
-Độ chính xác tiên đoán đối với lớp $C_2$ là
-\[
-P(C_2\mid \hat{C}_2)
-=
-\frac{n_{22}}{n_{2\bullet}}
-=
-\frac{418}{506}
-\approx
-0{,}8261
-\quad (82{,}61\%).
-\]
 Từ ma trận lỗi theo tần số, ta tính được các tỷ lệ tương ứng bằng công thức
 \[
 p_{ij}=\frac{n_{ij}}{n},\qquad i,j=1,2.
@@ -763,7 +737,8 @@ D_1=\{\bm{x}_{11},\bm{x}_{21},\ldots,\bm{x}_{n_1 1}\},
 D_2=\{\bm{x}_{12},\bm{x}_{22},\ldots,\bm{x}_{n_2 2}\}.
 \]
 
-Từ dữ liệu mô phỏng, ta tính trung bình mẫu \(\hat{\bm{\mu}}_1, \hat{\bm{\mu}}_2\) và ma trận hiệp phương sai mẫu của từng lớp. \[ \hat{\pi}_1=\hat{\pi}_2=0{,}5, \] \[ \hat{\bm{\mu}}_1 = \begin{pmatrix} 2{,}9716\\ 3{,}0225 \end{pmatrix}, \qquad \hat{\bm{\mu}}_2 = \begin{pmatrix} 3{,}2101\\ 2{,}5101 \end{pmatrix}, \] Ma trận hiệp phương sai mẫu của lớp 1 là \[ \hat{\Sigma}_1 = \begin{pmatrix} 2{,}1251 & 0{,}9023\\ 0{,}9023 & 1{,}9656 \end{pmatrix}. \] Ma trận hiệp phương sai mẫu của lớp 2 là \[ \hat{\Sigma}_2 = \begin{pmatrix} 1{,}7762 & 0{,}8397\\ 0{,}8397 & 1{,}9534 \end{pmatrix}. \] Từ đó, ma trận hiệp phương sai mẫu gộp được ước lượng bởi \[ \hat{\Sigma} = \begin{pmatrix} 1{,}9507 & 0{,}8710\\ 0{,}8710 & 1{,}9595 \end{pmatrix}. \]
+Từ dữ liệu mô phỏng, ta tính trung bình mẫu \(\hat{\bm{\mu}}_1, \hat{\bm{\mu}}_2\) và ma trận hiệp phương sai mẫu của từng lớp. \[ \hat{\pi}_1=\hat{\pi}_2=0{,}5, \] \[ \hat{\bm{\mu}}_1 = \begin{pmatrix} 2{,}9716\\ 3{,}0225 \end{pmatrix}, \qquad \hat{\bm{\mu}}_2 = \begin{pmatrix} 3{,}2101\\ 2{,}5101 \end{pmatrix}, \] 
+Ma trận hiệp phương sai mẫu của lớp 1 và lớp 2 lần lượt là \[ \hat{\Sigma}_1 = \begin{pmatrix} 2{,}1251 & 0{,}9023\\ 0{,}9023 & 1{,}9656 \end{pmatrix}, \qquad \hat{\Sigma}_2 = \begin{pmatrix} 1{,}7762 & 0{,}8397\\ 0{,}8397 & 1{,}9534 \end{pmatrix}. \] Từ đó, ma trận hiệp phương sai mẫu gộp được ước lượng bởi \[ \hat{\Sigma} = \begin{pmatrix} 1{,}9507 & 0{,}8710\\ 0{,}8710 & 1{,}9595 \end{pmatrix}. \]
 Khi đó, phương chiếu Fisher thực nghiệm được xác định bởi \[ \bm{b}_{\text{opt}} = \hat{\Sigma}^{-1}(\hat{\bm{\mu}}_1-\hat{\bm{\mu}}_2) = \begin{pmatrix} -0{,}2982\\ 0{,}3940 \end{pmatrix}. \] Đường phân loại tuyến tính của LDA có dạng \[ \bm{b}_{\text{opt}}^T \left( \bm{x}_{\text{bnd}} - \frac{\hat{\bm{\mu}}_1 + \hat{\bm{\mu}}_2}{2} \right) = 0. \] Trung điểm của hai vectơ trung bình mẫu là \[ \frac{\hat{\bm{\mu}}_1+\hat{\bm{\mu}}_2}{2} = \begin{pmatrix} 3{,}0908\\ 2{,}7663 \end{pmatrix}. \] Thay số vào, ta được \[ \begin{pmatrix} -0{,}2982 & 0{,}3940 \end{pmatrix} \left[ \bm{x} - \begin{pmatrix} 3{,}0908\\ 2{,}7663 \end{pmatrix} \right] = 0. \] Tương đương, \[ -0{,}2982x_1+0{,}3940x_2-0{,}1684=0. \] Hay \[ x_2=0{,}4274+0{,}7567x_1. \]
 
 \begin{figure}[H]
@@ -821,7 +796,36 @@ Hay,
 \[
 \text{Overall Accuracy}=60{,}5\%.
 \]
-Độ chính xác của thủ tục phân loại (hay Recall), đối với lớp $C_1$ là \[ P(\hat{C}_1\mid C_1) = \frac{n_{11}}{n_{\bullet 1}} = \frac{305}{500} = 0{,}610 \quad (61{,}0\%). \] Độ chính xác của thủ tục phân loại, đối với lớp $C_2$ là \[ P(\hat{C}_2\mid C_2) = \frac{n_{22}}{n_{\bullet 2}} = \frac{300}{500} = 0{,}600 \quad (60{,}0\%). \] Độ chính xác tiên đoán (Precision), đối với lớp $C_1$ là \[ P(C_1\mid \hat{C}_1) = \frac{n_{11}}{n_{1\bullet}} = \frac{305}{505} \approx 0{,}6040 \quad (60{,}40\%). \] Độ chính xác tiên đoán, đối với lớp $C_2$ là \[ P(C_2\mid \hat{C}_2) = \frac{n_{22}}{n_{2\bullet}} = \frac{300}{495} \approx 0{,}6061 \quad (60{,}61\%). \] Từ ma trận lỗi theo tần số, ta tính được các tỷ lệ tương ứng bằng công thức \[ p_{ij} = \frac{n_{ij}}{n}, \qquad i,j=1,2. \] Với $n=1000$, ta có \[ p_{11} = \frac{305}{1000} = 0{,}305, \qquad p_{12} = \frac{200}{1000} = 0{,}200, \] \[ p_{21} = \frac{195}{1000} = 0{,}195, \qquad p_{22} = \frac{300}{1000} = 0{,}300. \] Ngoài ra, \[ p_{1\bullet} = p_{11}+p_{12} = 0{,}305+0{,}200 = 0{,}505, \] \[ p_{2\bullet} = p_{21}+p_{22} = 0{,}195+0{,}300 = 0{,}495. \] Mặt khác, \[ p_{\bullet 1} = p_{11}+p_{21} = 0{,}305+0{,}195 = 0{,}500, \] \[ p_{\bullet 2} = p_{12}+p_{22} = 0{,}200+0{,}300 = 0{,}500. \]
+Các chỉ số độ chính xác phân loại (Recall) và độ chính xác tiên đoán (Precision) cho từng lớp $C_j$ ($j = 1, 2$) được xác định theo các công thức:
+\begin{itemize}
+	\item \textbf{Recall:} $P(\hat{C}_j\mid C_j) = \frac{n_{jj}}{n_{\bullet j}}$
+	\item \textbf{Precision:} $P(C_j\mid \hat{C}_j) = \frac{n_{jj}}{n_{j\bullet}}$
+\end{itemize}
+
+Kết quả tính toán cụ thể được tóm tắt trong Bảng \ref{tab:metrics_summary}
+
+\begin{table}[htpb]
+	\centering
+	\renewcommand{\arraystretch}{1.5}
+	\begin{tabular}{|c|c|c|}
+		\hline
+		\textbf{Lớp} & \textbf{Recall} $P(\hat{C}_j \mid C_j)$ & \textbf{Precision} $P(C_j \mid \hat{C}_j)$ \\
+		\hline
+		\textbf{$C_1$} & $\frac{305}{500} = 61{,}0\%$ & $\frac{305}{505} \approx 60{,}40\%$ \\
+		\hline
+		\textbf{$C_2$} & $\frac{300}{500} = 60{,}0\%$ & $\frac{300}{495} \approx 60{,}61\%$ \\
+		\hline
+	\end{tabular}
+	\caption{Các chỉ số Recall và Precision cho trường hợp hai lớp chồng lấp nhiều}
+	\label{tab:metrics_summary}
+\end{table}
+
+Từ ma trận lỗi theo tần số, ta tính được các tỷ lệ tương ứng bằng công thức $p_{ij} = \frac{n_{ij}}{n}$ ($i,j=1,2$). Với $n=1000$, ta có các tỷ lệ thành phần và các tổng lề như sau
+\begin{align*}
+	p_{11} &= \frac{305}{1000} = 0{,}305, & p_{12} &= \frac{200}{1000} = 0{,}200, & p_{1\bullet} &= 0{,}305 + 0{,}200 = 0{,}505 \\
+	p_{21} &= \frac{195}{1000} = 0{,}195, & p_{22} &= \frac{300}{1000} = 0{,}300, & p_{2\bullet} &= 0{,}195 + 0{,}300 = 0{,}495 \\
+	p_{\bullet 1} &= 0{,}305 + 0{,}195 = 0{,}500, & p_{\bullet 2} &= 0{,}200 + 0{,}300 = 0{,}500
+\end{align*}
 
 Do đó, ma trận lỗi theo tỷ lệ được cho bởi bảng sau
 \begin{table}[H]
@@ -836,7 +840,7 @@ Do đó, ma trận lỗi theo tỷ lệ được cho bởi bảng sau
 		$\hat{C}_2$ & $0{,}195$ & $0{,}300$ & $0{,}495$ \\ \hline
 		Tổng cộng & $0{,}500$ & $0{,}500$  & $1{,}000$ \\ \hline
 	\end{tabular}
-	\caption{Ma trận lỗi theo tỷ lệ của mô hình LDA trong trường hợp hai lớp chồng lấn nhiều.}
+	\caption{Ma trận lỗi theo tỷ lệ của mô hình LDA trong trường hợp hai lớp chồng lấp nhiều.}
 	\label{tab:MaTranLoiTyLe_LDA_ChongLanNhieu}
 \end{table}
 
@@ -939,7 +943,7 @@ Mặt khác, từ dữ liệu mô phỏng, ta tính trung bình mẫu \(\hat{\bm
 	3{,}0117
 \end{pmatrix}.
 \]
-Ma trận hiệp phương sai mẫu ước lượng của lớp $1$ là \[ \hat{\Sigma}_1 = \begin{pmatrix} 2{,}2861 & 0{,}0921\\ 0{,}0921 & 1{,}9651 \end{pmatrix}. \] Ma trận hiệp phương sai mẫu ước lượng của lớp $2$ là \[ \hat{\Sigma}_2 = \begin{pmatrix} 2{,}0503 & -0{,}1023\\ -0{,}1023 & 1{,}8030 \end{pmatrix}. \] Từ hai ma trận hiệp phương sai mẫu trên, ta thu được ma trận hiệp phương sai mẫu gộp \[ \hat{\Sigma} = \begin{pmatrix} 2{,}1682 & -0{,}0051\\ -0{,}0051 & 1{,}8841 \end{pmatrix}. \]
+Ma trận hiệp phương sai mẫu ước lượng của lớp $1$ và lớp $2$ lần lượt là \[ \hat{\Sigma}_1 = \begin{pmatrix} 2{,}2861 & 0{,}0921\\ 0{,}0921 & 1{,}9651 \end{pmatrix}, \qquad \hat{\Sigma}_2 = \begin{pmatrix} 2{,}0503 & -0{,}1023\\ -0{,}1023 & 1{,}8030 \end{pmatrix}. \] Từ hai ma trận hiệp phương sai mẫu trên, ta thu được ma trận hiệp phương sai mẫu gộp \[ \hat{\Sigma} = \begin{pmatrix} 2{,}1682 & -0{,}0051\\ -0{,}0051 & 1{,}8841 \end{pmatrix}. \]
 
 Khi đó, phương chiếu Fisher thực nghiệm được xác định bởi
 \[
@@ -1123,84 +1127,7 @@ Do $n_{12}=n_{21}=0$, không có quan sát nào bị phân loại sai. Vì vậy
 =
 100\%.
 \]
-
-Từ ma trận lỗi theo tần số, ta tính được các tỷ lệ tương ứng bằng công thức
-\[
-p_{ij}
-=
-\frac{n_{ij}}{n},
-\qquad i,j=1,2.
-\]
-
-Với $n=1000$, ta có
-\[
-p_{11}
-=
-\frac{500}{1000}
-=
-0{,}500,
-\qquad
-p_{12}
-=
-\frac{0}{1000}
-=
-0,
-\]
-\[
-p_{21}
-=
-\frac{0}{1000}
-=
-0,
-\qquad
-p_{22}
-=
-\frac{500}{1000}
-=
-0{,}500.
-\]
-
-Ngoài ra,
-\[
-p_{1\bullet}
-=
-p_{11}+p_{12}
-=
-0{,}500+0
-=
-0{,}500,
-\]
-\[
-p_{2\bullet}
-=
-p_{21}+p_{22}
-=
-0+0{,}500
-=
-0{,}500.
-\]
-
-Mặt khác,
-\[
-p_{\bullet 1}
-=
-p_{11}+p_{21}
-=
-0{,}500+0
-=
-0{,}500,
-\]
-\[
-p_{\bullet 2}
-=
-p_{12}+p_{22}
-=
-0+0{,}500
-=
-0{,}500.
-\]
-
-Do đó, ma trận lỗi theo tỷ lệ được cho bởi bảng sau
+Kết quả phân loại hoàn hảo này được thể hiện rất rõ qua ma trận lỗi theo tỷ lệ dưới đây
 \begin{table}[H]
 	\centering
 	\begin{tabular}{|c|cc|c|}
@@ -1216,5 +1143,4 @@ Do đó, ma trận lỗi theo tỷ lệ được cho bởi bảng sau
 	\caption{Ma trận lỗi theo tỷ lệ của mô hình LDA trong trường hợp hai lớp tách biệt hoàn toàn.}
 	\label{tab:MaTranLoiTyLe_LDA_TachBietHoanToan}
 \end{table}
-
 Trường hợp này cho thấy khi hai lớp có cùng ma trận hiệp phương sai dạng $\sigma^2 \mathbb{I}$, không có tương quan giữa các biến đặc trưng và hai tâm cách xa nhau, LDA đưa ra một biên phân loại rất trực quan: đường trung trực của đoạn nối hai tâm. Đây là một trường hợp đặc biệt trong đó quy tắc phân loại LDA tương đương với quy tắc gán điểm vào lớp có tâm gần nhất theo khoảng cách Euclid. Khi khoảng cách giữa hai tâm đủ lớn so với độ phân tán trong từng lớp, hai đám mây dữ liệu được phân tách hoàn toàn và tỷ lệ lỗi thực nghiệm bằng $0$.

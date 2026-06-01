@@ -1,0 +1,19 @@
+\babel@toc {vietnamese}{}\relax 
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Sơ đồ phân loại các phương pháp học thống kê.}}{2}{figure.caption.1}%
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Mô hình toán học máy học.}}{3}{figure.caption.2}%
+\contentsline {figure}{\numberline {1.3}{\ignorespaces Hình chiếu trực giao của $\bm {x}_j^*$ lên $\langle \mathbf {1} \rangle $}}{11}{figure.caption.4}%
+\contentsline {figure}{\numberline {1.4}{\ignorespaces Hình chiếu trực giao của hai vectơ $\bm {x}_j^*$, $\bm {x}_k^*$ lên $\langle \mathbf {1}\rangle $}}{12}{figure.caption.5}%
+\contentsline {figure}{\numberline {1.5}{\ignorespaces Đồ thị đám mây điểm biểu diễn mức độ tương quan của hai vectơ $\bm {x}_j^*$ và $\bm {x}_k^*$}}{13}{figure.caption.6}%
+\contentsline {figure}{\numberline {1.6}{\ignorespaces Minh họa hình học cho hệ số tải}}{15}{figure.caption.7}%
+\contentsline {figure}{\numberline {1.7}{\ignorespaces Ý tưởng hình học của Fisher để phân tách hai lớp tốt nhất, xem tài liệu \cite {hastie2009}.}}{19}{figure.caption.8}%
+\contentsline {figure}{\numberline {1.8}{\ignorespaces Đám mây điểm của ba lớp trong bộ dữ liệu Iris theo hai thuộc tính \textit {Petal.Length} và \textit {Petal.Width}.}}{31}{figure.caption.15}%
+\contentsline {figure}{\numberline {1.9}{\ignorespaces Minh họa phân loại một chiều bằng LDA trên bộ dữ liệu Iris với hai lớp \textit {versicolor} và \textit {virginica} theo thuộc tính \textit {Petal.Length}.}}{33}{figure.caption.16}%
+\contentsline {figure}{\numberline {1.10}{\ignorespaces Minh họa phân loại một chiều bằng LDA trên bộ dữ liệu Iris với hai lớp \textit {setosa} và \textit {versicolor} theo thuộc tính \textit {Petal.Length}.}}{37}{figure.caption.17}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Phân bố mẫu của hai lớp chuẩn hai chiều và biên phân loại LDA.}}{44}{figure.caption.20}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Ma trận lỗi dùng để đánh giá kết quả phân loại của mô hình LDA.}}{45}{figure.caption.21}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Phân bố mẫu của hai lớp chuẩn hai chiều có tương quan dương và mức độ chồng lấp lớn.}}{49}{figure.caption.24}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Ma trận lỗi của mô hình LDA trong trường hợp hai lớp chồng lấp nhiều.}}{50}{figure.caption.25}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Hai đám mây chuẩn hai chiều không tương quan, có dạng tròn và được phân tách bởi biên LDA gần với đường trung trực của hai tâm.}}{56}{figure.caption.28}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Ma trận lỗi của mô hình LDA trong trường hợp hai lớp tách biệt hoàn toàn.}}{57}{figure.caption.29}%
