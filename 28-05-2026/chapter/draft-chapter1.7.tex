@@ -1,0 +1,19 @@
+%=============1.7========================
+
+
+\section{Quan hệ với QDA và một số mở rộng}
+
+Nếu bỏ giả thiết các lớp có cùng ma trận hiệp phương sai, ta thu được bộ phân loại Bayes bậc hai, tức QDA. Khi đó, các hàm phân biệt có dạng
+\begin{equation}
+\delta_k(x)= -\frac12\log |\Sigma_k|
+-\frac12(x-\mu_k)^T\Sigma_k^{-1}(x-\mu_k)
++\log \pi_k,
+\end{equation}
+và biên quyết định giữa các lớp là các mặt bậc hai.
+
+Một hướng trung gian giữa LDA và QDA là Regularized Discriminant Analysis (RDA), trong đó
+\begin{equation}
+\hat\Sigma_k(\alpha)=\alpha\hat\Sigma_k+(1-\alpha)\hat\Sigma,
+\qquad 0\le \alpha \le 1.
+\end{equation}
+Khi $\alpha=0$, ta quay về LDA; khi $\alpha=1$, ta thu được QDA.

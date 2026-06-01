@@ -1,0 +1,28 @@
+# PCTeX Project File, Version 1.1
+	name: Seminar200626
+	texformat: latex
+	typesetmode: PDF
+	spellwordlist: american
+Seminar200626.tex
+	wndpos: 1 -1 -1 -1 -1 0 0 1154 424
+	zorder: 0
+	edit: 0
+Seminar200626.log
+Seminar200626.aux
+Seminar200626.out
+Seminar200626.nav
+Seminar200626.toc
+Figures\CrabData.jpg
+Figures\Pearson.jpg
+Figures\GMM.jpg
+Figures\DataGMM.jpg
+Figures\EM.jpg
+Figures\EstimateData.pdf
+Figures\LamADk.jpg
+Figures\LamkAD.jpg
+Figures\MFA.jpg
+Figures\DataMFA.jpg
+Figures\PenGMM.jpg
+Figures\DataPenGMM.jpg
+Figures\Fairymountain.jpg
+Seminar200626.pdf

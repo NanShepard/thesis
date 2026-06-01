@@ -1,0 +1,531 @@
+\documentclass[12pt,a4paper,oneside]{report}
+\setlength{\parindent}{0pt}  % tắt indent mặc định
+\setlength{\parskip}{0pt}    % khoảng cách giữa các đoạn
+%================= MÃ HÓA - NGÔN NGỮ =================
+\usepackage[utf8]{inputenc}
+\usepackage[T5]{fontenc}
+\usepackage[vietnamese]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{bbm}
+\usepackage{dsfont}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{float} 
+\usepackage[unicode]{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows, positioning}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{titlesec}
+\usetikzlibrary{calc, positioning, arrows.meta, backgrounds, angles, quotes, decorations.pathreplacing}
+
+\titleformat{\subsubsection}[block]
+  {\fontsize{13}{15}\selectfont\bfseries}
+  {\thesubsubsection}{1em}{}
+%================= FONT - TOÁN =================
+% \usepackage{eulervm}
+\usepackage{lmodern}
+
+
+%================= HÌNH ẢNH - MÀU - KHUNG =================
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usepackage{longtable}
+%================= CĂN LỀ - GIÃN DÒNG =================
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{ragged2e}
+\geometry{
+    a4paper,
+    top=2.5cm,
+    bottom=2.5cm,
+    left=3.5cm,
+    right=2.0cm
+}
+
+\setstretch{1.3}
+\setlength{\parindent}{0pt}  % tắt thụt đầu dòng mặc định
+\setlength{\parskip}{0pt}    % khoảng cách giữa các đoạn
+%\setlist[itemize]{leftmargin=2em,labelsep=0.5em}
+%\setlist[enumerate]{leftmargin=2em,labelsep=0.5em}
+
+%================= MỤC LỤC =================
+\usepackage{tocloft}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyfoot[C]{\thepage}
+    \renewcommand{\headrulewidth}{0pt}
+}
+\renewcommand{\contentsname}{MỤC LỤC}
+\renewcommand{\listfigurename}{Danh sách hình ảnh và biểu đồ}
+\renewcommand{\listtablename}{Danh sách bảng}
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+
+\renewcommand{\cftchapfont}{\bfseries}
+\renewcommand{\cftchappagefont}{\bfseries}
+\setlength{\cftbeforechapskip}{6pt}
+\setlength{\cftbeforesecskip}{2pt}
+
+
+%================= THÔNG TIN TÀI LIỆU =================
+\newcommand{\tentruong}{TRƯỜNG ĐẠI HỌC ĐÀ LẠT}
+\newcommand{\tenkhoa}{KHOA TOÁN - TIN HỌC}
+\newcommand{\tendoan}{ĐỒ ÁN CƠ SỞ}
+\newcommand{\tendetai}{TIẾP CẬN PHƯƠNG PHÁP LDA CỦA R.A. FISHER\\TRONG PHÂN LOẠI MẪU THỐNG KÊ}
+\newcommand{\gvhdmot}{Đặng Phước Huy}
+\newcommand{\gvhdhai}{Huỳnh Bảo Tuyên}
+\newcommand{\svth}{Phùng Ngọc Bảo}
+\newcommand{\mssv}{2212318}
+\newcommand{\lop}{KLK46}
+\newcommand{\noilam}{Lâm Đồng}
+\newcommand{\thoigian}{tháng 6 năm 2026}
+
+\begin{document}
+
+%====================================================
+%                   TRANG BÌA
+%====================================================
+
+\begin{titlepage}
+	\thispagestyle{empty}
+	
+	\begin{tikzpicture}[remember picture, overlay]
+		\draw[line width=0.8pt]
+		([xshift=3.5cm,yshift=-2.5cm]current page.north west)
+		rectangle
+		([xshift=-2.0cm,yshift=2.5cm]current page.south east);
+	\end{tikzpicture}
+	
+	\begin{center}
+		\vspace*{0.3cm}
+		
+		{\bfseries\fontsize{15}{18}\selectfont \tentruong \par}
+		\vspace{0.15cm}
+		{\bfseries\fontsize{15}{18}\selectfont \tenkhoa \par}
+		
+		\vspace{1.0cm}
+		
+		\includegraphics[width=3.4cm]{image/logo.png}
+		
+		\vspace{1.1cm}
+		
+		{\bfseries\fontsize{14}{20}\selectfont \tendoan \par}
+		
+		\vspace{2.8cm}
+		
+		{\bfseries\fontsize{13}{20}\selectfont\color{red!75!black}
+			\tendetai \par}
+		
+		\vspace{2.8cm}
+		
+		\begin{flushleft}
+			\hspace{5.8cm}Giảng viên hướng dẫn: \textbf\gvhdmot\\[0.35cm]
+			\hspace{5.8cm}\phantom{Giảng viên hướng dẫn:} \textbf\gvhdhai\\[0.35cm]
+			\hspace{5.8cm}Sinh viên thực hiện: \textbf{\svth}\\[0.35cm]
+			\hspace{5.8cm}Mã số sinh viên: \textbf{\mssv}\\[0.35cm]
+			\hspace{5.8cm}Lớp: \textbf{\lop}
+		\end{flushleft}
+		
+		\vfill
+		
+		{\fontsize{13}{15}\selectfont \noilam, \thoigian \par}
+	\end{center}
+\end{titlepage}
+
+%====================================================
+%                   TRANG BÌA LÓT
+%====================================================
+
+\clearpage
+\thispagestyle{empty}
+
+\begin{tikzpicture}[remember picture, overlay]
+	% Khung ngoài
+	\draw[line width=1.5pt]
+	([xshift=3.5cm,yshift=-2.0cm]current page.north west)
+	rectangle
+	([xshift=-2.0cm,yshift=2.0cm]current page.south east);
+	
+	% Khung trong
+	\draw[line width=0.5pt]
+	([xshift=3.65cm,yshift=-2.15cm]current page.north west)
+	rectangle
+	([xshift=-2.15cm,yshift=2.15cm]current page.south east);
+\end{tikzpicture}
+
+\begin{center}
+	\vspace*{0.0cm}
+	
+	{\bfseries\fontsize{13}{16}\selectfont TRƯỜNG ĐẠI HỌC ĐÀ LẠT\par}
+	\vspace{0.15cm}
+	{\bfseries\fontsize{13}{16}\selectfont KHOA TOÁN -- TIN HỌC\par}
+	
+	\vspace{2.0cm}
+	
+	{\bfseries\fontsize{12}{15}\selectfont PHÙNG NGỌC BẢO -- 2212318\par}
+	
+	\vspace{1.5cm}
+	
+	\vspace{2.5cm}
+	
+	{\bfseries\fontsize{13}{20}\selectfont
+		TIẾP CẬN PHƯƠNG PHÁP LDA CỦA R.A. FISHER\\
+		TRONG PHÂN LOẠI MẪU THỐNG KÊ
+		\par}
+	
+	\vspace{2.2cm}
+	
+	{\bfseries\fontsize{13}{20}\selectfont ĐỒ ÁN CƠ SỞ\par}
+	
+	\vspace{2.6cm}
+	
+	{\bfseries\fontsize{12}{16}\selectfont
+		GIẢNG VIÊN HƯỚNG DẪN\\
+		ĐẶNG PHƯỚC HUY\\
+		HUỲNH BẢO TUYÊN
+		\par}
+	
+	\vfill
+	
+	{\fontsize{12}{16}\selectfont LÂM ĐỒNG, NĂM 2026\par}
+	
+	\vspace*{0.5cm}
+\end{center}
+
+\clearpage
+%====================================================
+%               PHẦN ĐẦU LUẬN VĂN
+%====================================================
+\clearpage
+\pagenumbering{roman}
+\setcounter{page}{1}
+%====================================================
+%               PHẦN NHẬN XÉT CỦA GIÁNG VIÊN
+%====================================================
+
+%\clearpage
+%\thispagestyle{plain}
+%
+%\begin{center}
+%    \textbf{\fontsize{16}{18}\selectfont NHẬN XÉT CỦA GIẢNG VIÊN HƯỚNG DẪN 1}
+%\end{center}
+%
+%\vspace{0.5cm}
+%
+%\noindent Họ và tên sinh viên: \textbf{Phùng Ngọc Bảo}\\[0.3cm]
+%\noindent Mã số sinh viên: \textbf{2212318}\\[0.3cm]
+%\noindent Lớp: \textbf{KLK46}\\[0.4cm]
+%
+%\noindent Tên đề tài:\\
+%\textit{Tiếp cận phương pháp LDA của R.A. Fisher trong phân loại mẫu thống kê}
+%
+%\vspace{0.5cm}
+%
+%\noindent \textbf{Nội dung nhận xét:}
+%
+%
+%\vspace{0.4cm}
+%
+%\newcommand{\nhanxetline}{\noindent\makebox[\textwidth][l]{\rule{1\textwidth}{0.4pt}}\\[0.4cm]}
+%
+%\nhanxetline
+%\nhanxetline
+%\nhanxetline
+%\nhanxetline
+%\nhanxetline
+%\nhanxetline
+%
+%\vspace{0.0cm}
+%
+%\noindent \textbf{Đánh giá:}
+%
+%\vspace{0.0cm}
+%
+%\nhanxetline
+%\nhanxetline
+%
+%\vspace{0.0cm}
+%
+%\begin{flushright}
+%\textnormal{Lâm Đồng, ngày \hspace{1cm} tháng \hspace{1cm} năm 2026}\\[0.8cm]
+%\textbf{Giảng viên hướng dẫn}\\[2.6cm]
+%\textbf{(Ký và ghi rõ họ tên)}
+%\end{flushright}
+%
+%
+%%====================================================
+%%               PHẦN NHẬN XÉT CỦA GIÁNG VIÊN
+%%====================================================
+%
+%\clearpage
+%\thispagestyle{plain}
+%
+%\begin{center}
+%    \textbf{\fontsize{16}{18}\selectfont NHẬN XÉT CỦA GIẢNG VIÊN HƯỚNG DẪN 2}
+%\end{center}
+%
+%\vspace{0.5cm}
+%
+%\noindent Họ và tên sinh viên: \textbf{Phùng Ngọc Bảo}\\[0.3cm]
+%\noindent Mã số sinh viên: \textbf{2212318}\\[0.3cm]
+%\noindent Lớp: \textbf{KLK46}\\[0.4cm]
+%
+%\noindent Tên đề tài:\\
+%\textit{Tiếp cận phương pháp LDA của R.A. Fisher trong phân loại mẫu thống kê}
+%
+%\vspace{0.5cm}
+%
+%\noindent \textbf{Nội dung nhận xét:}
+%
+%
+%\vspace{0.4cm}
+%
+%\nhanxetline
+%\nhanxetline
+%\nhanxetline
+%\nhanxetline
+%\nhanxetline
+%\nhanxetline
+%
+%\vspace{0.0cm}
+%
+%\noindent \textbf{Đánh giá:}
+%
+%\vspace{0.0cm}
+%
+%\nhanxetline
+%\nhanxetline
+%
+%\vspace{0.0cm}
+%
+%\begin{flushright}
+%\textnormal{Lâm Đồng, ngày \hspace{1cm} tháng \hspace{1cm} năm 2026}\\[0.8cm]
+%\textbf{Giảng viên hướng dẫn}\\[2.6cm]
+%\textbf{(Ký và ghi rõ họ tên)}
+%\end{flushright}
+%
+%%====================================================
+%%               LỜI CAM ĐOAN
+%%====================================================
+%\clearpage
+%\thispagestyle{plain}
+%
+%\begin{center}
+%    \textbf{\fontsize{16}{18}\selectfont LỜI CAM ĐOAN}
+%\end{center}
+%
+%\vspace{0.5cm}
+%\justifying
+%
+%Đề tài \textit{“Tiếp cận phương pháp LDA của R.A. Fisher trong phân loại mẫu thống kê”} được thực hiện dưới sự hướng dẫn của giảng viên hướng dẫn. Tôi xin cam đoan đây là công trình nghiên cứu của riêng tôi, các nội dung trình bày trong đồ án là trung thực và chưa từng được công bố trong bất kỳ công trình nào khác.
+%
+%Trong quá trình thực hiện, tôi có tham khảo, kế thừa và sử dụng một số tài liệu, kết quả nghiên cứu, số liệu và nhận xét của các tác giả, cơ quan và tổ chức khác. Tất cả các nội dung tham khảo đều đã được trích dẫn và ghi rõ nguồn trong phần tài liệu tham khảo theo đúng quy định.
+%
+%Tôi xin hoàn toàn chịu trách nhiệm về tính trung thực, chính xác của nội dung đồ án. Nếu phát hiện có bất kỳ sự gian lận hay sao chép không hợp lệ nào, tôi xin hoàn toàn chịu trách nhiệm trước nhà trường và các quy định hiện hành.
+%
+%\vspace{2cm}
+%
+%\begin{flushright}
+%\begin{minipage}{6cm}
+%\centering
+%\textit{\noilam, tháng 5 năm 2026}\\[1.2cm]
+%\textbf{Sinh viên thực hiện}\\[2cm]
+%\textbf{\svth}
+%\end{minipage}
+%\end{flushright}
+%
+%%====================================================
+%%               LỜI CẢM ƠN
+%%====================================================
+%\clearpage
+%\thispagestyle{plain}
+%
+%\begin{center}
+%    \textbf{\fontsize{16}{18}\selectfont LỜI CẢM ƠN}
+%\end{center}
+%
+%\vspace{0.5cm}
+%\justifying
+%
+%Trước hết, tôi xin bày tỏ lòng biết ơn sâu sắc đến thầy \gvhdmot\ và thầy \gvhdhai\ đã tận tình hướng dẫn, định hướng và hỗ trợ tôi trong suốt quá trình thực hiện đồ án. Những góp ý chuyên môn và sự tận tâm của thầy, cô là nền tảng quan trọng giúp tôi hoàn thành đề tài này.
+%
+%Tôi xin chân thành cảm ơn quý thầy, cô trong \tenkhoa, \tentruong\ đã truyền đạt những kiến thức quý báu trong suốt quá trình học tập. Những kiến thức này không chỉ giúp tôi hoàn thành đồ án mà còn là hành trang quan trọng cho con đường học tập và làm việc sau này.
+%
+%Tôi cũng xin gửi lời cảm ơn đến gia đình và bạn bè đã luôn động viên, hỗ trợ và tạo điều kiện thuận lợi để tôi có thể tập trung hoàn thành tốt đồ án.
+%
+%Mặc dù đã có nhiều cố gắng, nhưng do hạn chế về thời gian và kiến thức, đồ án không tránh khỏi những thiếu sót. Tôi rất mong nhận được sự thông cảm và những góp ý quý báu từ quý thầy, cô để hoàn thiện hơn trong tương lai.
+
+%====================================================
+%               MỤC LỤC
+%====================================================
+\clearpage
+\tableofcontents
+
+%====================================================
+%          DANH MỤC HÌNH - DANH MỤC BẢNG
+%====================================================
+\clearpage
+\renewcommand{\listfigurename}{Danh sách hình ảnh và biểu đồ}
+\addcontentsline{toc}{chapter}{Danh sách hình ảnh và biểu đồ}
+\listoffigures
+
+\clearpage
+\renewcommand{\listtablename}{Danh sách bảng}
+\addcontentsline{toc}{chapter}{Danh sách bảng}
+\listoftables
+
+\vspace{1cm}
+
+\noindent{\normalfont\fontsize{24}{20}\bfseries Danh mục các ký hiệu, các chữ viết tắt\par}
+\addcontentsline{toc}{chapter}{Danh mục các ký hiệu, các chữ viết tắt}
+
+\vspace{0.8cm}
+
+
+\begin{longtable}{p{3cm}p{10cm}}
+	\textbf{Ký hiệu / Viết tắt} & \textbf{Ý nghĩa} \\
+	\hline
+	\endfirsthead
+	
+	\textbf{Ký hiệu / Viết tắt} & \textbf{Ý nghĩa} \\
+	\hline
+	\endhead
+	
+LDA & Linear Discriminant Analysis -- Phân tích tách biệt tuyến tính. \\[0.2cm]
+
+$C_k$ & Lớp thứ $k$ trong bài toán phân loại. \\[0.2cm]
+$K$ & Số lớp trong bài toán phân loại. \\[0.2cm]
+$n_k$ & Số quan sát thuộc lớp $C_k$. \\[0.2cm]
+$n$ & Tổng số quan sát trong tập dữ liệu. \\[0.2cm]
+
+$\bm{x}$ & Vectơ đặc trưng của một quan sát. \\[0.2cm]
+$\bm{\mu}_k$ & Vectơ trung bình của lớp $C_k$. \\[0.2cm]
+$\hat{\bm{\mu}}_k$ & Vectơ trung bình mẫu của lớp $C_k$. \\[0.2cm]
+
+$\Sigma$ & Ma trận hiệp phương sai chung. \\[0.2cm]
+$\hat{\Sigma}$ & Ma trận hiệp phương sai mẫu gộp. \\[0.2cm]
+
+$\Sigma_W$ & Ma trận tán xạ trong lớp. \\[0.2cm]
+$\Sigma_B$ & Ma trận tán xạ giữa các lớp. \\[0.2cm]
+
+$\bm{\beta}_{\text{opt}}$ & Hướng chiếu tối ưu của Fisher LDA. \\[0.2cm]
+$\bm{b}_{\text{opt}}$ & Vectơ pháp tuyến của biên phân loại LDA thực nghiệm. \\[0.2cm]
+
+$\pi_k$ & Xác suất tiên nghiệm của lớp $C_k$. \\[0.2cm]
+$\hat{\pi}_k$ & Ước lượng xác suất tiên nghiệm của lớp $C_k$. \\[0.2cm]
+
+$\delta_k(\bm{x})$ & Hàm phân biệt của lớp $C_k$. \\[0.2cm]
+$\hat{\delta}_k(\bm{x})$ & Hàm phân biệt ước lượng của lớp $C_k$. \\[0.2cm]
+
+$\bm{x}_{\text{bnd}}$ & Điểm nằm trên biên quyết định. \\[0.2cm]
+$x_{\text{bnd}}$ & Ngưỡng phân loại trong trường hợp một chiều. \\[0.2cm]
+
+$\widehat{\mathrm{TPM}}$ & Tỷ lệ phân loại sai thực nghiệm. \\[0.2cm]
+Overall Accuracy & Độ chính xác tổng thể của mô hình phân loại. \\[0.2cm]
+Recall & Độ chính xác theo lớp, tính theo lớp đúng. \\[0.2cm]
+Precision & Độ chính xác tiên đoán, tính theo lớp dự báo. \\[0.2cm]
+	
+\end{longtable}
+%====================================================
+%               TÓM TẮT
+%====================================================
+\clearpage
+\thispagestyle{plain}
+
+\begin{center}
+	\textbf{\fontsize{16}{18}\selectfont MỞ ĐẦU}
+\end{center}
+
+\vspace{0.5cm}
+\justifying
+
+Đề tài tập trung nghiên cứu phương pháp phân tích tách biệt tuyến tính, hay Linear Discriminant Analysis (LDA), theo cách tiếp cận của R.A. Fisher trong bài toán phân loại mẫu thống kê. Đây là một phương pháp quan trọng trong thống kê nhiều chiều và học máy có giám sát, được sử dụng nhằm tìm một phép chiếu tuyến tính giúp các lớp dữ liệu được phân tách tốt hơn trong không gian đặc trưng. Trọng tâm của đồ án là làm rõ cơ sở toán học của LDA, đặc biệt là nguyên lý lựa chọn hướng chiếu sao cho khoảng cách giữa các lớp sau chiếu là lớn, đồng thời độ phân tán trong từng lớp là nhỏ.
+
+Về mặt lý thuyết, đồ án trình bày các khái niệm nền tảng như vectơ đặc trưng, vectơ trung bình mẫu, ma trận hiệp phương sai, ma trận tán xạ trong lớp và ma trận tán xạ giữa các lớp. Từ tiêu chuẩn Fisher, đồ án chỉ ra cách xác định hướng chiếu tối ưu trong trường hợp hai lớp. Bên cạnh đó, phương pháp LDA cũng được khảo sát dưới góc nhìn của lý thuyết quyết định Bayes. Khi các lớp có phân phối chuẩn nhiều chiều và cùng ma trận hiệp phương sai, quy tắc Bayes dẫn đến các hàm phân biệt tuyến tính, từ đó cho thấy sự tương ứng giữa hướng chiếu tối ưu của Fisher và biên quyết định tuyến tính của Bayes.
+
+Phần thực nghiệm của đồ án được triển khai trên bộ dữ liệu Iris và dữ liệu mô phỏng hai chiều. Với dữ liệu Iris, đồ án minh họa quy tắc phân loại một chiều theo thuộc tính Petal.Length cho hai cặp lớp: versicolor – virginica và setosa – versicolor. Kết quả cho thấy khi hai lớp có vùng chồng lấn, LDA vẫn có thể phát sinh lỗi phân loại; ngược lại, khi hai lớp tách biệt rõ ràng trên trục một chiều, ngưỡng LDA có thể phân loại đúng toàn bộ các quan sát.
+
+Đối với dữ liệu mô phỏng hai chiều, đồ án xét ba tình huống khác nhau: hai lớp có mức độ chồng lấn tương đối nhỏ, hai lớp chồng lấn mạnh do tâm gần nhau, và hai lớp tách biệt hoàn toàn khi hai tâm cách xa nhau. Qua đó, đồ án cho thấy LDA hoạt động hiệu quả khi dữ liệu có cấu trúc lớp rõ ràng, nhưng hiệu quả phân loại giảm đáng kể khi vùng chồng lấn giữa các lớp quá lớn, ngay cả khi các giả thiết của mô hình vẫn được thỏa mãn.
+
+Để đánh giá kết quả phân loại, đồ án sử dụng ma trận lỗi cùng các chỉ số như tỷ lệ phân loại sai thực nghiệm, độ chính xác tổng thể, recall và precision. Các kết quả thu được cho thấy LDA là một phương pháp phân loại tuyến tính có cơ sở toán học rõ ràng, vừa có ý nghĩa hình học thông qua hướng chiếu tối ưu của Fisher, vừa có nền tảng xác suất thông qua quy tắc phân loại Bayes. Phương pháp này đặc biệt phù hợp với các bài toán mà các lớp có cấu trúc tương đối tách biệt và có chung ma trận hiệp phương sai.
+
+Kết quả nghiên cứu cho thấy phương pháp LDA có ý nghĩa quan trọng trong việc giảm chiều dữ liệu và hỗ trợ phân loại hiệu quả đối với các bài toán có cấu trúc lớp rõ ràng. Từ những kết quả đạt được, đồ án góp phần làm rõ hơn giá trị lý thuyết cũng như khả năng ứng dụng thực tiễn của phương pháp LDA trong lĩnh vực phân tích dữ liệu và học máy.
+
+%====================================================
+%               NỘI DUNG CHÍNH
+%====================================================
+\clearpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\include{chapter/chapter1-chuanbikienthuc}
+\include{chapter/chapter2-LDAtrongphanloaihailop}
+\include{chapter/chapter3-Ketluan}
+
+%====================================================
+%               TÀI LIỆU THAM KHẢO
+%====================================================
+\clearpage
+\addcontentsline{toc}{chapter}{Tài liệu tham khảo}
+\begin{thebibliography}{99}
+
+\bibitem{dangphuochuy2010}
+Đặng Phước Huy,
+\textit{Bài giảng tóm tắt -- Thống kê toán học},
+Trường Đại học Đà Lạt, 2010.
+
+\bibitem{dangphuochuy2023}
+Đặng Phước Huy,
+\textit{Bài giảng tóm tắt -- Phân tích thống kê nhiều chiều},
+Trường Đại học Đà Lạt, 2023.
+
+\bibitem{dangphuochuy2025}
+Đặng Phước Huy,
+\textit{Bài giảng tóm tắt -- Lý thuyết học thống kê},
+Trường Đại học Đà Lạt, 2025.
+
+\bibitem{ledinhphu2022}
+Lê Đình Phú,
+\textit{Suy diễn thống kê với phương pháp mẫu nhỏ (Khóa luận tốt nghiệp cử nhân toán học)},
+Khoa Toán -- Tin học, Trường Đại học Đà Lạt, 2022.
+
+\bibitem{fisher1936}
+R. A. Fisher,
+\textit{The Use of Multiple Measurements in Taxonomic Problems},
+Annals of Eugenics, Vol. 7, No. 2, pp. 179--188, 1936.
+
+\bibitem{bishop2006}
+Christopher M. Bishop,
+\textit{Pattern Recognition and Machine Learning},
+Springer, 2006.
+
+\bibitem{hastie2009}
+Trevor Hastie, Robert Tibshirani, Jerome Friedman,
+\textit{The Elements of Statistical Learning: Data Mining, Inference, and Prediction},
+2nd ed., Springer, 2009.
+
+\bibitem{johnson2007}
+Johnson R. A., Wichern D. W.,
+\textit{Applied Multivariate Statistical Analysis},
+Pearson Prentice Hall, Pearson Education, Inc, 2007.
+
+\bibitem{irisUCI}
+R. A. Fisher,
+\textit{Iris},
+UCI Machine Learning Repository, 1936.
+DOI: \url{https://doi.org/10.24432/C56C76}.
+
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,42 @@
+
+%================3
+\chapter*{Kết luận}
+\addcontentsline{toc}{chapter}{Kết luận}
+\markboth{Kết luận}{Kết luận}
+
+\section*{1. Kết quả đạt được}
+
+Đồ án đã trình bày cơ sở lý thuyết của phương pháp phân tích tách biệt tuyến tính Fisher trong bài toán phân loại mẫu thống kê. Trọng tâm của phương pháp là tìm một hướng chiếu tuyến tính sao cho khoảng cách giữa các lớp sau khi chiếu được làm lớn, đồng thời độ phân tán trong từng lớp được làm nhỏ. Từ đó, tiêu chuẩn Fisher được xây dựng dựa trên tỷ số giữa độ phân tán giữa lớp và độ phân tán trong lớp. Đối với trường hợp hai lớp, đồ án đã thiết lập các ma trận tán xạ trong lớp, tán xạ giữa lớp và đưa bài toán tối ưu Fisher về dạng thương Rayleigh. Qua đó, hướng chiếu tối ưu được xác định bởi \[ \bm{\beta}_{\text{opt}} \propto \Sigma_W^{-1}(\bm{\mu}_1-\bm{\mu}_2). \] Đây là kết quả cơ bản của Fisher LDA trong trường hợp hai lớp. Bên cạnh cách tiếp cận hình học, đồ án cũng đã trình bày cách tiếp cận theo lý thuyết quyết định Bayes. Trong trường hợp các lớp có phân phối chuẩn nhiều chiều và cùng ma trận hiệp phương sai, quy tắc Bayes dẫn đến hàm phân biệt tuyến tính. Do đó, biên quyết định giữa hai lớp là một siêu phẳng tuyến tính. Đồ án cũng chỉ ra rằng phương chiếu tối ưu của Fisher và phương pháp tuyến của biên quyết định Bayes đều cùng phương với \[ \Sigma^{-1}(\bm{\mu}_1-\bm{\mu}_2). \] Điều này cho thấy LDA vừa có ý nghĩa hình học, vừa có cơ sở xác suất từ lý thuyết Bayes. Ngoài phần lý thuyết, đồ án đã minh họa phương pháp LDA trên bộ dữ liệu Iris và dữ liệu mô phỏng hai chiều. Với dữ liệu Iris, kết quả cho thấy khi hai lớp có vùng chồng lấn thì vẫn xuất hiện sai số phân loại; ngược lại, khi hai lớp tách biệt rõ ràng thì LDA có thể phân loại chính xác hoàn toàn. Với dữ liệu mô phỏng, đồ án đã xét nhiều tình huống khác nhau: hai lớp chồng lấn vừa phải, hai lớp chồng lấn mạnh và hai lớp tách biệt hoàn toàn. Kết quả thực nghiệm cho thấy tỷ lệ lỗi phụ thuộc rõ rệt vào mức độ chồng lấn giữa các lớp. 
+
+Như vậy, đồ án đã làm rõ được cơ sở toán học của Fisher LDA, chứng minh nghiệm tối ưu trong trường hợp hai lớp, trình bày sự tương đồng giữa Fisher LDA và quy tắc Bayes, đồng thời kiểm chứng bằng các ví dụ thực nghiệm. Các kết quả thu được cho thấy LDA là một phương pháp phân loại tuyến tính có nền tảng lý thuyết rõ ràng, đặc biệt hiệu quả khi dữ liệu có cấu trúc lớp tương đối tách biệt và giả thiết có cùng hiệp phương sai là phù hợp.
+
+\section*{2. Một số vấn đề cần tiếp tục nghiên cứu}
+
+Trong phạm vi đồ án, phương pháp LDA mới được khảo sát chủ yếu trong trường hợp hai lớp. Vì vậy, một hướng nghiên cứu tiếp theo là mở rộng LDA cho bài toán nhiều lớp, tức trường hợp \(K>2\). Khi đó, không gian chiếu tối ưu có số chiều tối đa là \(K-1\), giúp phân tách đồng thời nhiều lớp trong cùng một mô hình. Việc nghiên cứu LDA nhiều lớp sẽ làm rõ hơn khả năng mở rộng của phương pháp trong các bài toán phân loại thực tế có nhiều nhóm đối tượng.
+
+Bên cạnh đó, có thể tiếp tục so sánh LDA với các phương pháp phân loại mẫu khác như hồi quy logistic, KNN, cây quyết định, SVM hoặc các mô hình học máy hiện đại. Qua đó, có thể xác định rõ hơn ưu điểm, hạn chế và điều kiện áp dụng phù hợp của LDA so với các phương pháp phân loại khác.
+
+Đây là những hướng giúp hoàn thiện hơn việc nghiên cứu và đánh giá khả năng ứng dụng của LDA trong phân loại mẫu thống kê.
+
+
+%Trong phạm vi đồ án, phương pháp LDA chủ yếu được khảo sát trong trường hợp hai lớp, dữ liệu có phân phối chuẩn nhiều chiều và các lớp có cùng ma trận hiệp phương sai. Đây là giả thiết thuận lợi giúp biên quyết định thu được có dạng tuyến tính. Tuy nhiên, trong các bài toán thực tế, dữ liệu thường có cấu trúc phức tạp hơn. Do đó, một hướng nghiên cứu tiếp theo là mở rộng việc khảo sát LDA trong các trường hợp dữ liệu không hoàn toàn thỏa mãn giả thiết Gaussian hoặc các lớp có ma trận hiệp phương sai khác nhau.
+%
+%Một hướng mở rộng tự nhiên là nghiên cứu phương pháp phân tích biệt thức bậc hai, tức Quadratic Discriminant Analysis (QDA). Khác với LDA, QDA cho phép mỗi lớp có một ma trận hiệp phương sai riêng. Khi đó, biên quyết định giữa các lớp nói chung không còn là siêu phẳng tuyến tính mà có dạng bậc hai. Việc so sánh LDA và QDA trên các bộ dữ liệu có mức độ chồng lấn khác nhau sẽ giúp đánh giá rõ hơn khi nào giả thiết cùng hiệp phương sai của LDA là phù hợp và khi nào cần dùng mô hình linh hoạt hơn.
+%
+%Ngoài ra, đồ án mới chỉ xét chủ yếu bài toán phân loại hai lớp. Trong các ứng dụng thực tế, số lớp thường lớn hơn hai. Vì vậy, có thể tiếp tục nghiên cứu LDA trong trường hợp nhiều lớp, tức là với $K>2$. Khi đó, không gian chiếu tối ưu của Fisher có số chiều tối đa là $K-1$, và bài toán không chỉ là tìm một hướng chiếu duy nhất mà là tìm một không gian con giúp phân tách đồng thời nhiều lớp. Đây là hướng mở rộng quan trọng để áp dụng LDA cho các bài toán phân loại đa lớp.
+%
+%Một vấn đề khác cần tiếp tục nghiên cứu là ảnh hưởng của số chiều dữ liệu đến hiệu quả của LDA. Khi số chiều đặc trưng lớn so với cỡ mẫu, ma trận phân tán trong lớp hoặc ma trận hiệp phương sai mẫu gộp có thể suy biến hoặc khó khả nghịch. Trong trường hợp này, công thức
+%\[
+%\beta_{\text{opt}}=\Sigma_W^{-1}(\mu_1-\mu_2)
+%\]
+%không còn áp dụng trực tiếp theo cách thông thường. Do đó, có thể nghiên cứu thêm các biến thể của LDA như regularized LDA, shrinkage LDA hoặc sử dụng giả nghịch đảo Moore--Penrose để xử lý trường hợp ma trận suy biến.
+%
+%Bên cạnh các mô phỏng đơn giản, một hướng phát triển tiếp theo là áp dụng LDA trên các bộ dữ liệu thực tế có quy mô lớn hơn. Trong đồ án, bộ dữ liệu Iris và dữ liệu mô phỏng đã giúp minh họa rõ ý nghĩa hình học và khả năng phân loại của LDA. Tuy nhiên, để đánh giá tính ứng dụng thực tế, cần thử nghiệm thêm trên các bộ dữ liệu thuộc nhiều lĩnh vực khác nhau như nhận dạng chữ viết tay, phân loại y sinh, tài chính, dữ liệu khách hàng hoặc các bài toán phân loại ảnh sau khi trích xuất đặc trưng.
+%
+%Ngoài việc đánh giá bằng ma trận lỗi và độ chính xác tổng thể, có thể mở rộng hệ thống đánh giá mô hình bằng nhiều chỉ số khác như precision, recall, F1-score, sensitivity, specificity và đường cong ROC. Đặc biệt, trong các bài toán dữ liệu mất cân bằng, độ chính xác tổng thể có thể không phản ánh đầy đủ chất lượng phân loại. Vì vậy, việc nghiên cứu các chỉ số đánh giá phù hợp hơn là cần thiết khi áp dụng LDA trong các bài toán thực tiễn.
+%
+%Một hướng nghiên cứu khác là so sánh LDA với các phương pháp phân loại tuyến tính và phi tuyến khác, chẳng hạn như hồi quy logistic, K lân cận gần nhất, cây quyết định, máy vector hỗ trợ và các phương pháp học máy hiện đại. Việc so sánh này có thể được thực hiện dựa trên cùng một bộ dữ liệu, cùng một quy trình chia tập huấn luyện và tập kiểm tra, từ đó đánh giá ưu điểm và hạn chế của LDA so với các phương pháp khác.
+%
+%Cuối cùng, có thể tiếp tục nghiên cứu vai trò của LDA như một phương pháp giảm chiều có giám sát. Trong hướng này, LDA không chỉ được dùng như một bộ phân loại mà còn được dùng để biến đổi dữ liệu sang một không gian mới có khả năng phân tách lớp tốt hơn. Việc kết hợp LDA với các phương pháp khác, chẳng hạn dùng LDA để giảm chiều trước khi áp dụng một bộ phân loại khác, cũng là một hướng nghiên cứu có ý nghĩa thực tiễn.
+%
+%Tóm lại, các hướng nghiên cứu tiếp theo có thể tập trung vào việc mở rộng LDA cho bài toán nhiều lớp, khảo sát các biến thể của LDA trong trường hợp ma trận hiệp phương sai không thuận lợi, so sánh LDA với các phương pháp phân loại khác, và áp dụng phương pháp này trên các bộ dữ liệu thực tế. Những hướng phát triển này sẽ giúp đánh giá đầy đủ hơn khả năng ứng dụng của LDA trong phân tích dữ liệu và học máy.

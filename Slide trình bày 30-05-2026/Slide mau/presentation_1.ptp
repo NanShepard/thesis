@@ -1,0 +1,13 @@
+# PCTeX Project File, Version 1.1
+	name: presentation_1
+	texformat: LATEX
+	typesetmode: PDF
+	spellwordlist: american
+presentation_1.tex
+presentation_1.log
+presentation_1.aux
+presentation_1.out
+presentation_1.nav
+presentation_1.toc
+presentation_1.vrb
+presentation_1.pdf

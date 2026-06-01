@@ -1,0 +1,59 @@
+%================1.2
+\section{Mẫu từ vector đặc trưng nhiều chiều của quần thể}
+
+
+Như đã đề cập ở phần trên, bài toán phân loại mẫu thống kê đề cập đến mẫu ngẫu nhiên trong một quần thể. Cho điểm (vectơ) ngẫu nhiên $d$ chiều $\bm{X} = (X_1, X_2, \dots, X_d)^\text{T}$ có hàm phân phối xác suất đồng thời $F(\bm{x} \mid \mu, \Sigma)$ không được biết rõ. Dãy các điểm ngẫu nhiên $d$ chiều $\bm{X}_1, \bm{X}_2, \dots, \bm{X}_n$ gọi là một mẫu ngẫu nhiên (đơn giản) cỡ $n$ lấy từ điểm ngẫu nhiên $\bm{X}$ nếu như các $\bm{X}_k$ ($k = 1, 2, \dots, n$) là độc lập và có chung phân phối $F(\bm{x} \mid \mu, \Sigma)$ với $\bm{X}$. Mẫu ngẫu nhiên này có thể được biểu diễn dưới dạng ma trận dữ liệu như sau
+\begin{equation*}
+	\mathbf{X} = 
+	\begin{pmatrix}
+		\bm{X}_1^\text{T} \\
+		\bm{X}_2^\text{T} \\
+		\vdots \\
+		\bm{X}_n^\text{T}
+	\end{pmatrix}
+	=
+	\begin{pmatrix}
+		X_{11} & X_{12} & \dots & X_{1d} \\
+		X_{21} & X_{22} & \dots & X_{2d} \\
+		\vdots & \vdots & \ddots & \vdots \\
+		X_{n1} & X_{n2} & \dots & X_{nd}
+	\end{pmatrix}
+\end{equation*} ở đây $\bm{X}_i \in \mathbb{R}^d$, $\bm{X}_i = (X_{i1}, X_{i2}, \dots, X_{id})^\text{T}$, $i = 1, \dots, n$. Giá trị thể hiện hay còn gọi là giá trị được quan sát, được ghi nhận của một mẫu ngẫu nhiên sẽ được viết chữ nhỏ như thông thường, chẳng hạn
+\begin{equation*}
+	\bm{x} = (\bm{x}_1, \bm{x}_2, \dots, \bm{x}_n)^\text{T} = 
+	\begin{pmatrix}
+		x_{11} & x_{12} & \dots & x_{1d} \\
+		x_{21} & x_{22} & \dots & x_{2d} \\
+		\vdots & \vdots & \ddots & \vdots \\
+		x_{n1} & x_{n2} & \dots & x_{nd}
+	\end{pmatrix}
+\end{equation*} để chỉ cho giá trị được quan sát hoặc ma trận dữ liệu mẫu của mẫu ngẫu nhiên này, trong đó: $\bm{X}_i = \bm{x}_i \equiv (x_{i1}, x_{i2}, \dots, x_{id})^\text{T}$ là giá trị thể hiện của $\bm{X}_i$ (hoặc giá trị quan sát được của $\bm{X}$ ở lần thứ $i$ trong mẫu ($i = 1, 2, \dots, n$)).
+
+Ta cũng có thể trình bày theo dạng bảng dữ liệu thống kê thô (thường sử dụng để mô tả, chẳng hạn, cho dữ liệu đầu vào của một thủ tục phân tích hồi quy) như sau
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.2} % Tăng khoảng cách dòng cho dễ nhìn
+\begin{tabular}{|c||cccc|}
+\hline
+\multirow{2}{*}{\makecell{\textnormal{STT}}} & \multicolumn{4}{|c|}{Các dấu hiệu (Các biến)} \\ \cline{2-5} 
+ & $X_1$ & $X_2$ & $\dots$ & $X_d$ \\ \hline
+\textnormal{1} & $x_{11}$ & $x_{12}$ & $\dots$ & $x_{1d}$ \\
+\textnormal{2} & $x_{21}$ & $x_{22}$ & $\dots$ & $x_{2d}$ \\
+$\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ \\
+\textnormal{i} & $x_{i1}$ & $x_{i2}$ & $\dots$ & $x_{id}$ \\
+$\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ \\
+\textnormal{n} & $x_{n1}$ & $x_{n2}$ & $\dots$ & $x_{nd}$ \\ \hline
+\end{tabular}
+\caption{Bảng dữ liệu thống kê thô của các biến đầu vào}
+\label{tab:raw_data}
+\end{table}
+Trong đó,
+\begin{itemize}
+	\item Mỗi cột đại diện cho dữ liệu quan sát một biến.
+	\item Hàng thứ $i$ đại diện cho giá trị thể hiện của quan sát thứ $i$, ký hiệu là $\bm{x}_i$, ($i = 1, 2, \dots, n$). Trong đó
+	\[
+	\bm{x}_i = (x_{i1}, x_{i2}, \dots, x_{id})^{\top},
+	\]
+	và $x_{ij}$ là giá trị quan sát thứ $i$ của biến $X_j$, với $j = 1, 2, \dots, d$.
+\end{itemize}
+

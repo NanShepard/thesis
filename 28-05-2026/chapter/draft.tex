@@ -1,0 +1,317 @@
+\chapter {Cơ sở lý thuyết}
+
+\setlength{\parindent}{0pt}
+
+\section{Bài toán phân loại mẫu thống kê}
+
+Trong thống kê nhiều chiều, bài toán phân loại mẫu thống kê nhằm xác định một đối tượng quan sát thuộc về lớp hay quần thể nào dựa trên các đặc trưng đo được của nó. Giả sử có tập dữ liệu
+\[
+X = \{x_1, x_2, \ldots, x_N\}
+\]
+Trong đó mỗi mẫu $x_i$ được biểu diễn bởi $M$ biến đặc trưng. Tập dữ liệu được chia thành $l$ lớp:
+\[
+X = \{c_1, c_2, \ldots, c_l\}
+\]
+với $c_j$ là lớp thứ $j$, $n_j$ là số mẫu thuộc lớp đó và
+\[
+N = \sum_{j=1}^{l} n_j
+\]
+Mục tiêu của phân loại là xây dựng một quy tắc quyết định để khi có một mẫu mới, ta có thể gán mẫu đó vào lớp phù hợp nhất. Trong bối cảnh học có giám sát, nhãn lớp của các mẫu huấn luyện đã biết trước, nhờ đó có thể khai thác thông tin về cấu trúc giữa các lớp để xây dựng bộ phân loại. Đây là một phương pháp giảm chiều có giám sát, trong đó nhãn lớp được sử dụng để tìm ra không gian biểu diễn mới giúp tăng khả năng tách biệt giữa các lớp.
+
+Đối với bài toán LDA, tư tưởng cốt lõi không chỉ là giảm số chiều của dữ liệu mà còn là tìm một phép chiếu tuyến tính sao cho các lớp sau khi chiếu trở nên “dễ phân biệt” nhất. Vì vậy, bài toán phân loại mẫu trong LDA gắn chặt với việc đánh giá mức độ phân tán của dữ liệu trong từng lớp và mức độ tách biệt giữa các lớp.
+
+\section{Mẫu ngẫu nhiên từ vector đặc trưng nhiều chiều của quần thể}
+
+Như đã đề cập ở phần trên, bài toán phân loại mẫu thống kê đề cập đến mẫu ngẫu nhiên trong một quần thể. Cho điểm (vector) ngẫu nhiên $d$ chiều $\mathbf{X} = (X_1, X_2, \ldots, X_d)^{\top}$ có hàm phân phối xác suất đồng thời $F(x \mid \mu, \Sigma)$ không được biết rõ. Dãy các điểm ngẫu nhiên $d$ chiều $X_1,X_2,\ldots,X_n$ gọi là một mẫu ngẫu nhiên (đơn giản) cỡ $n$ lấy từ điểm ngẫu nhiên $\mathbf{X}$ nếu như các $X_k$ $(k=1, 2,\ldots, n)$ là độc lập và có chung phân phối $F(x \mid \mu, \Sigma)$ với $X$. 
+Mẫu ngẫu nhiên này có thể được biểu diễn dưới dạng ma trận dữ liệu như sau:
+\[
+\mathbf{X}=
+\begin{pmatrix}
+\mathbf{X}_1^{\top}\\
+\mathbf{X}_2^{\top}\\
+\vdots\\
+\mathbf{X}_n^{\top}
+\end{pmatrix}
+=
+\begin{pmatrix}
+x_{11} & x_{12} & \cdots & x_{1d}\\
+x_{21} & x_{22} & \cdots & x_{2d}\\
+\vdots & \vdots & \ddots & \vdots\\
+x_{n1} & x_{n2} & \cdots & x_{nd}
+\end{pmatrix}
+\]
+
+ở đây $\mathbf{X}_i \in \mathbb{R}^d$, $\mathbf{X}_i = (x_{i1}, x_{i2}, \ldots, x_{id})^{\top}$, $i=1,\ldots,n$. Giá trị thể hiện hay còn gọi là giá trị được quan sát, được ghi nhận của một mẫ ngẫu nhiên sẽ được viết chữ nhỏ như thông thường, chẳng hạn:
+\[
+\mathbf{X} = (\bm{x}_1, \bm{x}_2, \dots, \bm{x}_n)^{\top} = 
+\begin{pmatrix}
+x_{11} & x_{12} & \dots & x_{1d} \\
+x_{21} & x_{22} & \dots & x_{2d} \\
+\vdots & \vdots & \ddots & \vdots \\
+x_{n1} & x_{n2} & \dots & x_{nd}
+\end{pmatrix}
+\]
+để chỉ cho giá trị được quan sát hoặc ma trận dữ liệu mẫu của mẫu ngẫu nhiên này, trong đó: $\bm{X}_i = \bm{x}_i \equiv (x_{i1}, x_{i2}, \dots, x_{id})^{\top}$ là giá trị thể hiện của $\bm{X}_i$ (hoặc giá trị quan sát được của $\bm{X}$ ở lần thứ $i$ trong mẫu $(i=1,2,…,n)$).
+
+Ta cũng có thể trình bày theo dạng bảng dữ liệu thống kê thô (thường sử dụng để mô tả, chẳng hạn, cho dữ liệu đầu vào của một thủ tục phân tích hồi quy) như sau:
+
+\begin{table}[ht]
+\centering
+\renewcommand{\arraystretch}{1.2} % Tăng khoảng cách dòng cho dễ nhìn
+\begin{tabular}{|c||cccc|}
+\hline
+\multirow{2}{*}{\makecell{\textnormal{STT}}} & \multicolumn{4}{|c|}{Các dấu hiệu (Các biến)} \\ \cline{2-5} 
+ & $X_1$ & $X_2$ & $\dots$ & $X_d$ \\ \hline
+\textnormal{1} & $x_{11}$ & $x_{12}$ & $\dots$ & $x_{1d}$ \\
+\textnormal{2} & $x_{21}$ & $x_{22}$ & $\dots$ & $x_{2d}$ \\
+$\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ \\
+\textnormal{i} & $x_{i1}$ & $x_{i2}$ & $\dots$ & $x_{id}$ \\
+$\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ \\
+\textnormal{n} & $x_{n1}$ & $x_{n2}$ & $\dots$ & $x_{nd}$ \\ \hline
+\end{tabular}
+\end{table}
+
+Trong đó,
+\begin{itemize}
+    \item Mỗi cột đại diện cho một biến.
+    \item \text{STT:} Chỉ số thứ tự của các mẫu quan sát ($i = 1, 2, \dots, n$).
+    \item Hàng thứ $i$ đại diện cho quan sát thứ $i: \bm{x}_i$, $i = \overline{1, p}$ với
+\[
+\bm{x}_i = (x_{i1}, x_{i2}, \dots, x_{id})^{\top},
+\] 
+và $x_{ij}$ là giá trị quan trắc thứ $i$ của biến $X_j$, $j = \overline{1, p}$. 
+\end{itemize}
+
+
+\section{Các moment đặc trưng mẫu}
+Cho $\bm{X}_1, \bm{X}_2, \dots, \bm{X}_n$ là mẫu ngẫu nhiên cỡ $n$ lấy từ điểm ngẫu nhiên $d$ chiều $\mathbf{X} = (\bm{X}_1, \bm{X}_2, \ldots, \bm{X}_d)^{\top}$. Ta quan tâm đến các moment đặc trưng sau đây.
+
+\subsection{Điểm trung bình mẫu}
+Để mô tả đặc trưng thống kê của từng lớp, trước hết cần xét vectơ trung bình. Điểm (vector) trung bình mẫu là điểm ngẫu nhiên $d$ chiều xác định bởi 
+\[
+\bar{\bm{X}} = \frac{1}{n} \sum_{i=1}^{n} \bm{X}_i = 
+\begin{pmatrix}
+\overline{X_1} \\
+\overline{X_2} \\
+\vdots \\
+\overline{X_d}
+\end{pmatrix}
+\]
+trong đó $\overline{X}_j = \frac{1}{n} \sum_{i=1}^n X_{ij}$ là trung bình mẫu của biến ngẫu nhiên $X_j$ $(j = 1, 2, \dots, d)$.
+Với lớp $c_j$ trong bài toán phân loại mẫu, vectơ trung bình được xác định bởi
+\[
+\mu_j = \frac{1}{n_j} \sum_{\mathbf{x}_i \in C_j} \mathbf{x}_i
+\]
+Vectơ này biểu diễn vị trí trung tâm của lớp thứ $j$ trong không gian $M$ chiều. Tương tự, vectơ trung bình toàn cục của toàn bộ mẫu được cho bởi:
+\[
+\mu = \frac{1}{N} \sum_{i=1}^{N} \mathbf{x}_i = \sum_{j=1}^{c} \frac{n_j}{N} \mu_j
+\]
+Đây là hai đại lượng nền tảng để xây dựng ma trận tán xạ trong lớp và giữa các lớp, đồng thời được minh họa trực quan ở phần mô tả các bước của LDA.
+
+\section*{Ví dụ minh họa}
+
+Giả sử ta có tập dữ liệu gồm $N=4$ mẫu thuộc $c=2$ lớp trong không gian 2 chiều ($d=2$):
+
+\begin{itemize}
+    \item \textbf{Lớp $C_1$ ($n_1=2$):} $\bm{x}_1 = (1, 2)^T, \bm{x}_2 = (2, 3)^T$
+    \item \textbf{Lớp $C_2$ ($n_2=2$):} $\bm{x}_3 = (5, 6)^T, \bm{x}_4 = (6, 7)^T$
+\end{itemize}
+
+\subsection*{1. Tính toán các vectơ trung bình lớp ($\mu_j$)}
+
+Sử dụng công thức $\mu_j = \frac{1}{n_j} \sum_{\bm{x}_i \in C_j} \bm{x}_i$:
+
+\begin{itemize}
+    \item Trung bình lớp 1:
+    \[
+    \mu_1 = \frac{1}{2} \left[ \begin{pmatrix} 1 \\ 2 \end{pmatrix} + \begin{pmatrix} 2 \\ 3 \end{pmatrix} \right] = \begin{pmatrix} 1.5 \\ 2.5 \end{pmatrix}
+    \]
+    \item Trung bình lớp 2:
+    \[
+    \mu_2 = \frac{1}{2} \left[ \begin{pmatrix} 5 \\ 6 \end{pmatrix} + \begin{pmatrix} 6 \\ 7 \end{pmatrix} \right] = \begin{pmatrix} 5.5 \\ 6.5 \end{pmatrix}
+    \]
+\end{itemize}
+
+\subsection*{2. Tính toán vectơ trung bình toàn cục ($\mu$)}
+
+Sử dụng công thức $\mu = \sum_{j=1}^{c} \frac{n_j}{N} \mu_j$:
+\[
+\mu = \frac{2}{4} \begin{pmatrix} 1.5 \\ 2.5 \end{pmatrix} + \frac{2}{4} \begin{pmatrix} 5.5 \\ 6.5 \end{pmatrix} = \begin{pmatrix} 0.75 + 2.75 \\ 1.25 + 3.25 \end{pmatrix} = \begin{pmatrix} 3.5 \\ 4.5 \end{pmatrix}
+\]
+
+\noindent \textbf{Nhận xét:} Vectơ $\mu$ nằm chính giữa hai "trọng tâm" lớp, đóng vai trò là tâm điểm của toàn bộ tập dữ liệu mẫu.
+
+\subsection{Ma trận hiệp phương sai mẫu}
+
+Bên cạnh vectơ trung bình, \textbf{ma trận hiệp phương sai} là công cụ mô tả mức độ biến thiên và mối liên hệ tuyến tính giữa các biến trong dữ liệu. Ma trận hiệp phương sai mẫu được xác định như sau:
+
+\[
+\bm{S} = \bm{S}_n \equiv \frac{1}{n-1} \sum_{i=1}^{n} (\bm{X}_i - \bar{\bm{X}})(\bm{X}_i - \bar{\bm{X}})^T = 
+\begin{pmatrix}
+S_1^2 & S_{12} & \dots & S_{1d} \\
+S_{21} & S_2^2 & \dots & S_{2d} \\
+\vdots & \vdots & \ddots & \vdots \\
+S_{d1} & S_{d2} & \dots & S_d^2
+\end{pmatrix},
+\]
+
+\noindent ở đây
+\begin{itemize}
+    \item $S_{kl} \equiv \frac{1}{n-1} \sum_{i=1}^{n} (X_{ik} - \bar{X}_k)(X_{il} - \bar{X}_l)$ là hiệp phương sai mẫu của hai biến ngẫu nhiên $X_k, X_l$ ($k, l \in \{1, \dots, d\}$),
+    \item $S_k^2 \equiv S_{kk}$ là phương sai mẫu của $X_k$ ($k = 1, 2, \dots, d$).
+\end{itemize}
+
+Các phần tử trên đường chéo chính biểu thị phương sai của từng biến; các phần tử ngoài đường chéo phản ánh hiệp phương sai, tức mức độ hai biến cùng biến thiên với nhau. Nếu hiệp phương sai dương, hai biến có xu hướng tăng hoặc giảm cùng nhau; nếu âm, chúng biến thiên ngược chiều; nếu gần bằng 0, mối liên hệ tuyến tính yếu.
+
+Trong bài toán phân loại mẫu thống kê, với lớp ($c_j$), ma trận hiệp phương sai mẫu có thể viết:
+
+\[
+\bm{S}_j = \frac{1}{n_j - 1} \sum_{\bm{x}_i \in C_j} (\bm{x}_i - \mu_j)(\bm{x}_i - \mu_j)^T
+\]
+
+\noindent \textbf{Tính chất:} Cho $\bm{X}_1, \bm{X}_2, \dots, \bm{X}_N$ là mẫu ngẫu nhiên cỡ $n$ lấy từ điểm ngẫu nhiên $d$ chiều $\bm{X} \sim (\bm{\mu}, \bm{\Sigma})$. Khi đó:
+
+\medskip
+\noindent \textbf{(a) Điểm trung bình mẫu $\bar{\bm{X}}$ có tính chất:}
+\[
+E(\bar{\bm{X}}) = \bm{\mu}; \qquad D(\bar{\bm{X}}) \equiv cov(\bar{\bm{X}}) = \frac{\bm{\Sigma}}{n},
+\]
+vì thế $\bar{\bm{X}}$ là ước lượng không chệch cho $\bm{\mu}$.
+
+\medskip
+\noindent \textbf{(b) Ma trận hiệp phương sai mẫu $\bm{S}$ ước lượng không chệch cho $\bm{\Sigma}$:}
+
+\[
+E(\bm{S}) = \frac{n}{n-1} E(\bar{\bm{S}}) = \bm{\Sigma}.
+\]
+\section*{Ví dụ minh họa (tiếp theo)}
+
+Giả sử quần thể dữ liệu có các tham số là:
+\[
+\bm{\mu} = \begin{pmatrix} 3.5 \\ 4.5 \end{pmatrix}, \quad \bm{\Sigma} = \begin{pmatrix} 4 & 2 \\ 2 & 4 \end{pmatrix}
+\]
+
+Xét mẫu ngẫu nhiên $n=4$ đã lấy ở ví dụ trước:
+$\bm{x}_1 = (1, 2)^T, \bm{x}_2 = (2, 3)^T, \bm{x}_3 = (5, 6)^T, \bm{x}_4 = (6, 7)^T$.
+
+\subsection*{1. Kiểm chứng tính chất của $\bar{\bm{X}}$}
+Ta đã tính được trung bình mẫu:
+\[
+\bar{\bm{X}} = \begin{pmatrix} 3.5 \\ 4.5 \end{pmatrix}
+\]
+\textbf{Nhận xét:} Trong trường hợp này, $\bar{\bm{X}}$ trùng khớp với $\bm{\mu}$, minh họa cho tính chất $E(\bar{\bm{X}}) = \bm{\mu}$ (ước lượng không chệch).
+
+\subsection*{2. Kiểm chứng tính chất của $\bm{S}$}
+Tính ma trận hiệp phương sai mẫu $\bm{S}$ với $n-1 = 3$:
+\begin{itemize}
+    \item Các hiệu số $(\bm{x}_i - \bar{\bm{X}})$ lần lượt là: $(-2.5, -2.5)^T, (-1.5, -1.5)^T, (1.5, 1.5)^T, (2.5, 2.5)^T$.
+    \item Tính tổng các ma trận tích ngoài:
+    \[
+    \sum_{i=1}^{4} (\bm{x}_i - \bar{\bm{X}})(\bm{x}_i - \bar{\bm{X}})^T = \begin{pmatrix} 12.5 & 12.5 \\ 12.5 & 12.5 \end{pmatrix} + \begin{pmatrix} 2.25 & 2.25 \\ 2.25 & 2.25 \end{pmatrix} + \dots = \begin{pmatrix} 29.5 & 29.5 \\ 29.5 & 29.5 \end{pmatrix}
+    \]
+    \item Ma trận hiệp phương sai mẫu:
+    \[
+    \bm{S} = \frac{1}{3} \begin{pmatrix} 29.5 & 29.5 \\ 29.5 & 29.5 \end{pmatrix} \approx \begin{pmatrix} 9.83 & 9.83 \\ 9.83 & 9.83 \end{pmatrix}
+    \]
+\end{itemize}
+
+\noindent \textbf{Ý nghĩa:} Mặc dù giá trị cụ thể của $\bm{S}$ trong một lần lấy mẫu có thể khác $\bm{\Sigma}$, nhưng tính chất $E(\bm{S}) = \bm{\Sigma}$ đảm bảo rằng nếu ta lấy mẫu vô hạn lần và tính trung bình các $\bm{S}$ đó, ta sẽ thu được chính xác ma trận $\bm{\Sigma}$ của quần thể.
+
+\subsection{Ma trận tương quan mẫu}
+
+Ma trận tương quan mẫu là một bảng (ma trận vuông) thể hiện hệ số tương quan ($r$) giữa các cặp biến trong một tập dữ liệu, mô tả độ mạnh và hướng (dương/âm) của mỗi quan hệ tuyến tính. Hệ số nằm từ -1 đến +1, trong đó 0 là không tương quan, +1 là tương quan thuận hoàn hảo, và -1 là tương quan nghịch hoàn hảo.
+
+\[
+\bm{R} = (R_{kl})_{d \times d} \equiv 
+\begin{pmatrix}
+1 & R_{12} & \dots & R_{1d} \\
+R_{21} & 1 & \dots & R_{2d} \\
+\vdots & \vdots & \ddots & \vdots \\
+R_{d1} & R_{d2} & \dots & 1
+\end{pmatrix}
+\]
+
+\noindent ở đây
+
+\[
+R_{kl} \equiv \frac{S_{kl}}{S_k \cdot S_l} = \frac{\sum_{i=1}^n (X_{ik} - \bar{X}_k)(X_{il} - \bar{X}_l)}{\sqrt{\sum_{i=1}^n (X_{ik} - \bar{X}_k)^2} \cdot \sqrt{\sum_{i=1}^n (X_{il} - \bar{X}_l)^2}}
+\]
+
+\noindent là hệ số tương quan mẫu của hai biến ngẫu nhiên $X_k, X_l$ ($k, l \in \{1, \dots, d\}$).
+
+Tương tự, khi đề cập một giá trị thể hiện của nó ta sẽ sử dụng cách viết chữ nhỏ, cụ thể: với ma trận dữ liệu mẫu $\mathbb{X} = (\bm{x}_1, \bm{x}_2, \dots, \bm{x}_N)^T$ nhận được từ điểm ngẫu nhiên $d$ chiều $\bm{X} \sim (\bm{\mu}, \bm{\Sigma})$, giá trị (thể hiện) tương ứng của ma trận tương quan mẫu ký hiệu là $\bm{r}$, tức là ($\bm{R} = \bm{r}$),
+
+\[
+\bm{r} = r_{kl} \equiv 
+\begin{pmatrix}
+1 & r_{12} & \dots & r_{1d} \\
+r_{21} & 1 & \dots & r_{2d} \\
+\vdots & \vdots & \ddots & \vdots \\
+r_{d1} & r_{d2} & \dots & 1
+\end{pmatrix}
+\]
+Trong đó
+\[
+r_{kl} \equiv \frac{s_{kl}}{s_k \cdot s_l} = \frac{\sum_{i=1}^n (x_{ik} - \bar{x}_k)(x_{il} - \bar{x}_l)}{\sqrt{\sum_{i=1}^n (x_{ik} - \bar{x}_k)^2} \cdot \sqrt{\sum_{i=1}^n (x_{il} - \bar{x}_l)^2}}
+\]
+
+\noindent là giá trị hệ số tương quan mẫu của hai biến ngẫu nhiên $X_k, X_l$ ($k, l \in \{1, \dots, d\}$), được biết như là hệ số tương quan tích-moment Pearson (The Pearson product-moment correlation coefficient).
+
+\section{Mối liên hệ giữa Hiệp phương sai và Tương quan}
+
+Hệ số tương quan Pearson ($\rho_{kl}$) là một đại lượng vô hướng, thể hiện mức độ liên hệ tuyến tính giữa hai biến ngẫu nhiên sau khi đã loại bỏ ảnh hưởng của đơn vị đo lường:
+
+\[
+\rho_{kl} = \frac{\sigma_{kl}}{\sigma_k \sigma_l} = \frac{cov(X_k, X_l)}{\sqrt{D(X_k) D(X_l)}}
+\]
+
+\noindent \textbf{Tính chất của hệ số tương quan:}
+\begin{itemize}
+    \item \textbf{Miền giá trị:} $-1 \leq \rho_{kl} \leq 1$.
+    \item \textbf{Độc lập và không tương quan:} Nếu hai biến ngẫu nhiên độc lập thì $\rho_{kl} = 0$. Tuy nhiên, nếu $\rho_{kl} = 0$ thì hai biến chỉ không có liên hệ tuyến tính, chúng vẫn có thể có liên hệ phi tuyến.
+    \item \textbf{Ý nghĩa thực tiễn:} Trong phân tích dữ liệu, $|\rho_{kl}| \geq 0.3$ thường được coi là bắt đầu có tương quan tuyến tính.
+\end{itemize}
+
+\section{Phép chiếu trên $\mathbb{R}^n$ và Vector độ lệch}
+
+Xét vector đơn vị $\bm{\mathbb{1}} = (1, 1, \dots, 1)^T \in \mathbb{R}^n$. Đường thẳng sinh bởi vector này, ký hiệu là $\langle \bm{\mathbb{1}} \rangle$, đóng vai trò là đường phân giác của hệ trục tọa độ chính tắc trong $\mathbb{R}^n$.
+
+\subsection{Hình chiếu lên không gian trung bình}
+Hình chiếu của vector đặc trưng mẫu $\bm{x}^*_i$ lên đường thẳng $\langle \bm{\mathbb{1}} \rangle$ được xác định bởi:
+\[
+proj_{\bm{\mathbb{1}}} \bm{x}^*_i = \left( \frac{\langle \bm{x}^*_i, \bm{\mathbb{1}} \rangle}{\|\bm{\mathbb{1}}\|^2} \right) \bm{\mathbb{1}} = \left( \frac{1}{n} \sum_{k=1}^n x_{ki} \right) \bm{\mathbb{1}} = \bar{x}_i \cdot \bm{\mathbb{1}}
+\]
+\noindent Trong đó, $\bar{x}_i$ chính là giá trị trung bình mẫu của biến thứ $i$.
+
+\subsection{Vector độ lệch (Deviation Vector)}
+Vector độ lệch $\bm{d}_i$ là phần dư của phép chiếu, đại diện cho sự biến thiên của dữ liệu xung quanh giá trị trung bình:
+\[
+\bm{d}_i \equiv \bm{x}^*_i - \bar{x}_i \bm{\mathbb{1}}, \quad i = \overline{1, d}
+\]
+\noindent Vector này trực giao với vector $\bm{\mathbb{1}}$ ($\bm{d}_i \perp \bm{\mathbb{1}}$). Độ dài của nó liên quan trực tiếp đến phương sai: $\|\bm{d}_i\|^2 = n \cdot s_i^2$.
+
+\section{Ý nghĩa hình học Hilbert của Hệ số tương quan}
+
+Hệ số tương quan Pearson $r_{ij}$ giữa hai biến $X_i$ và $X_j$ thực chất là cosine của góc giữa hai vector độ lệch tương ứng trong không gian mẫu $\mathbb{R}^n$.
+
+\[
+r_{ij} = \frac{cov(X_i, X_j)}{\sqrt{D(X_i) D(X_j)}} = \frac{\langle \bm{d}_i, \bm{d}_j \rangle}{\|\bm{d}_i\| \cdot \|\bm{d}_j\|} = \cos(\bm{d}_i, \bm{d}_j)
+\]
+
+\noindent \textbf{Các trường hợp đặc biệt:}
+\begin{itemize}
+    \item \textbf{$r_{ij} = 0 \Leftrightarrow \cos(\bm{d}_i, \bm{d}_j) = 0$}: Hai vector độ lệch trực giao ($\bm{d}_i \perp \bm{d}_j$). Hai biến không có tương quan tuyến tính.
+    \item \textbf{$r_{ij} = 1 \Leftrightarrow \cos(\bm{d}_i, \bm{d}_j) = 1$}: Hai vector $\bm{d}_i, \bm{d}_j$ cùng chiều. Tồn tại mối liên hệ tuyến tính hoàn hảo: $x_{kj} = \alpha + \beta x_{ki}$ với $\beta > 0$.
+    \item \textbf{$|r_{ij}| \leq 1$}: Hệ quả trực tiếp từ bất đẳng thức Cauchy-Schwarz.
+\end{itemize}
+
+\section{Trực quan hóa đám mây điểm (Scatter Plot)}
+Xét tập dữ liệu 2 chiều $d=2$ với các mẫu từ điểm ngẫu nhiên $\bm{X} = (X_1, X_2)^T$:
+\begin{itemize}
+    \item \textbf{Centroid ($A$):} Tâm của đám mây điểm chính là vector trung bình mẫu $\bar{\bm{x}} = (\bar{x}_1, \bar{x}_2)^T$.
+    \item \textbf{Trục chính (AF):} Hướng mà đám mây điểm kéo giãn nhất, thể hiện tính chất tương quan dương/âm.
+    \item \textbf{Tương quan dương:} Đám mây điểm tập trung quanh đường thẳng có độ dốc dương (như Hình 1A trong ghi chép).
+    \item \textbf{Tương quan không:} Ma trận hiệp phương sai có dạng $\bm{\Sigma} = \sigma^2 \bm{I}$, đám mây điểm có dạng hình tròn, không có hướng ưu tiên.
+\end{itemize}
+
+

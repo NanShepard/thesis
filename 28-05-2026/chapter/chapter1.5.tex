@@ -1,0 +1,156 @@
+%================1.5
+\section{Lý thuyết quyết định Bayes trong bài toán phân
+loại}
+
+\subsection{Xác suất hậu nghiệm và quy tắc Bayes}
+
+Trong lý thuyết quyết định thống kê, một quy tắc phân loại được xem là tối ưu nếu nó làm cực tiểu hóa rủi ro kỳ vọng. Đối với trường hợp hàm tổn thất 0 -- 1 như đang xét trong đồ án này, bài toán tối ưu tương đương với việc cực tiểu hóa xác suất phân loại lỗi. Khi đó, quy tắc Bayes nói lên rằng: với một quan trắc $\bm{x}$, ta nên gán $\bm{x}$ vào lớp có xác suất hậu nghiệm lớn nhất. Nếu ký hiệu $\widehat{G}$ là hàm phân lớp, thì quy tắc Bayes được xác định như sau
+\begin{equation}
+\widehat{G}=\arg\max_k P(G=k\mid \bm{X}=\bm{x}).
+\end{equation}
+Theo công thức Bayes,
+\begin{equation}
+P(G=k\mid \bm{X}=\bm{x})=\frac{\pi_k f_k(\bm{x})}{\sum_{\ell=1}^{K}\pi_\ell f_\ell(\bm{x})},
+\end{equation}
+trong đó 
+$f_k(\bm{x})=p(\bm{x}\,|\,G=k)$ là mật độ có điều kiện của $\bm{X}$ trong lớp $k$, còn $\pi_k=P(G=k)$ là xác suất tiên nghiệm của lớp đó. Vì mẫu số là như nhau cho mọi lớp khi so sánh, quy tắc Bayes tối ưu có thể viết gọn thành
+\begin{equation}
+\widehat{G}=\arg\max_k \{\pi_kf_k(\bm{x})\}.
+\end{equation}
+
+Điều này cho thấy, nếu biết đầy đủ các mật độ điều kiện và các xác suất tiên nghiệm, thì bài toán phân loại về nguyên tắc đã được giải quyết.
+
+\subsection{LDA trong cách tiếp cận của lý thuyết quyết định Bayes}
+
+Để áp dụng quy tắc Bayes trên một bộ phân loại cụ thể, cần giả thiết dạng của các mật độ lớp. Một giả thiết phổ biến trong phân tích thống kê nhiều chiều là mỗi lớp tuân theo phân phối chuẩn nhiều chiều. Cụ thể, với lớp $C_k$, ta giả sử
+\begin{equation}
+\left(\bm{X}\mid G=k\right)\sim N_d(\bm{\mu}_k,\Sigma_k),
+\end{equation}
+
+trong đó $\bm{\mu}_k$ là vectơ trung bình và $\Sigma_k$ là ma trận hiệp phương sai của lớp $k$. Khi đó, mật độ lớp có dạng
+
+\begin{equation}
+f_k(\bm{x})=\frac{1}{(2\pi)^{d/2}|\Sigma_k|^{1/2}}
+\exp\left\{-\frac12(\bm{x}-\bm{\mu}_k)^T\Sigma_k^{-1}(\bm{x}-\bm{\mu}_k)\right\}.
+\end{equation}
+
+Thay biểu thức này vào quy tắc Bayes và lấy logarit cơ số \(e\), tức là logarit tự nhiên đồng thời bỏ qua các hằng số chung không phụ thuộc vào $k$. Khi đó, ta thu được các hàm phân biệt
+\begin{equation}
+\delta_k(\bm{x})= -\frac12\ln |\Sigma_k|
+-\frac12(\bm{x}-\bm{\mu}_k)^T\Sigma_k^{-1}(\bm{x}-\bm{\mu}_k)
++\ln \pi_k,
+\end{equation}
+Quy tắc phân loại Bayes trở thành
+\begin{equation}
+\widehat{G}(\bm{x})=\arg\max_k \delta_k(\bm{x}).
+\end{equation}
+
+\hspace*{0.5cm}LDA xuất hiện như một trường hợp riêng có ý nghĩa đặc biệt của mô hình Gaussian ở trên, khi giả sử tất cả các lớp có chung một ma trận hiệp phương sai, tức là
+\[
+\Sigma_1=\Sigma_2=\cdots=\Sigma_K=\Sigma.
+\]
+Trong trường hợp này, các hàm phân biệt được rút gọn thành
+\begin{equation}
+	\delta_k(\bm{x})=\bm{x}^T\Sigma^{-1}\bm{\mu}_k-\frac12\bm{\mu}_k^T\Sigma^{-1}\bm{\mu}_k+\ln \pi_k.
+\end{equation}
+
+Công thức này cho thấy $\delta_k(\bm{x})$ là một hàm tuyến tính theo $\bm{x}$. Do đó, biên quyết định giữa hai lớp bất kỳ $k$ và $\ell$, xác định bởi điều kiện $\delta_k(\bm{x})=\delta_\ell(\bm{x})$, có dạng
+\begin{equation}
+	\bm{x}^T\Sigma^{-1}(\bm{\mu}_k-\bm{\mu}_\ell)
+	-\frac12\bigl(\bm{\mu}_k^T\Sigma^{-1}\bm{\mu}_k-\bm{\mu}_\ell^T\Sigma^{-1}\bm{\mu}_\ell\bigr)
+	+\ln\frac{\pi_k}{\pi_\ell}=0.
+\end{equation}
+
+Đây là phương trình của một siêu phẳng trong không gian $\mathbb{R}^d$. Như vậy, dưới giả thiết phân bố trên các lớp là phân phối chuẩn nhiều chiều với cùng ma trận hiệp phương sai, quy tắc Bayes cho biên phân loại giữa 2 lớp bất kỳ là tuyến tính.
+
+Trong trường hợp hai lớp (bài toán lưỡng phân), nếu đặt
+\[
+\bm{a}
+=
+\Sigma^{-1}(\bm{\mu}_1-\bm{\mu}_2)
+\]
+và
+\[
+b
+=
+-\frac12
+\bigl(
+\bm{\mu}_1^T\Sigma^{-1}\bm{\mu}_1
+-
+\bm{\mu}_2^T\Sigma^{-1}\bm{\mu}_2
+\bigr)
++
+\ln\frac{\pi_1}{\pi_2}.
+\]
+thì biên quyết định có dạng
+\begin{equation}
+	\bm{a}^T\bm{x}_\text{bnd}+b=0.
+	\label{eq:ni}
+\end{equation}
+
+Trong thực hành, các tham số quần thể $\pi_k,\mu_k,\Sigma$ không biết trước và phải được ước lượng từ dữ liệu huấn luyện. Gọi $N$ là tổng số mẫu, $N_k$ là số mẫu thuộc lớp $k$. Các ước lượng mẫu cho các tham số quần thể được xác định như sau
+\begin{equation}
+	\hat{\pi}_k=\frac{N_k}{N},
+	\qquad
+	\hat{\bm{\mu}}_k
+	=
+	\frac{1}{N_k}
+	\sum_{g_i=k}
+	\bm{x}_i,
+	\qquad (k=1,2,\ldots,K),
+\end{equation}
+và ma trận hiệp phương sai mẫu gộp
+\begin{equation}
+	\hat{\Sigma}
+	=
+	\frac{1}{N-K}
+	\sum_{k=1}^{K}
+	\sum_{g_i=k}
+	(\bm{x}_i-\hat{\bm{\mu}}_k)
+	(\bm{x}_i-\hat{\bm{\mu}}_k)^T.
+\end{equation}
+
+Từ đó, các hàm phân biệt ước lượng có dạng
+\begin{equation}
+	\hat{\delta}_k(\bm{x})
+=
+\bm{x}^T\hat{\Sigma}^{-1}\hat{\bm{\mu}}_k
+-\frac12
+\hat{\bm{\mu}}_k^T\hat{\Sigma}^{-1}\hat{\bm{\mu}}_k
++\ln\hat{\pi}_k,
+\end{equation}
+và quy tắc phân loại là
+\begin{equation}
+	\hat{G}(\bm{x})
+=
+\arg\max_k \hat{\delta}_k(\bm{x}).
+\end{equation}
+
+Trong bài toán hai lớp, điều này tương đương với việc kiểm tra dấu của hiệu $\hat{\delta}_1(\bm{x})-\hat{\delta}_2(\bm{x})$.
+
+\hspace*{0.5cm}Đến đây có thể thấy rằng hai cách tiếp cận tưởng như khác nhau thực ra dẫn đến cùng một cấu trúc toán học. Theo luật quyết định Bayes, dưới giả thiết phân bố chuẩn có cùng hiệp phương sai, và $\pi_1=\pi_2$, khi đó biên tách biệt trong phương trình~\eqref{eq:ni} sẽ cho bởi phương trình
+\begin{equation}
+\boxed{
+	\left[
+	\hat{\Sigma}^{-1}
+	(\hat{\bm{\mu}}_1-\hat{\bm{\mu}}_2)
+	\right]^T
+	\bm{x}_{\text{bnd}}
+	-
+	\frac{1}{2}
+	\left(
+	\hat{\bm{\mu}}_1^T
+	\hat{\Sigma}^{-1}
+	\hat{\bm{\mu}}_1
+	-
+	\hat{\bm{\mu}}_2^T
+	\hat{\Sigma}^{-1}
+	\hat{\bm{\mu}}_2
+	\right)
+	=
+	0
+}
+\label{eq:class1}
+\end{equation}
+
+Đây chính là biên tách biệt tuyến tính theo cách tiếp cận của Fisher được cho trong phương trình~\eqref{eq:class} 

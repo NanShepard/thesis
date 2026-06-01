@@ -1,0 +1,79 @@
+%================1.6
+\section{Xác định độ chính xác phân loại mẫu thống kê}
+
+Trong phạm vi đồ án này, ta chỉ xét trường hợp hàm tổn thất $0-1$. 
+Điều này có nghĩa là nếu một quan sát được phân loại đúng thì chi phí phân loại bằng $0$, 
+còn nếu quan sát đó bị phân loại sai thì chi phí phân loại bằng $1$, bất kể sai từ lớp $C_1$ sang $C_2$ hay từ lớp $C_2$ sang $C_1$. Khi đó, với một quan sát cỡ $n$, hiệu quả của một phương pháp phân loại được thể hiện qua ma trận nhập nhằng, hay ma trận lỗi (confusion matrix) được cho trong bảng sau 
+
+
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|cc|c|}
+		\hline
+		\multirow{2}{*}{Các lớp dự báo} & \multicolumn{2}{c|}{Các lớp đúng} & \multirow{2}{*}{Tổng cộng} \\ \cline{2-3}
+		& $C_1$ & $C_2$ & \\ \hline
+		$\hat{C}_1$ & $n_{11}$ & $n_{12}$ & $n_{1\bullet}$ \\
+		$\hat{C}_2$ & $n_{21}$ & $n_{22}$ & $n_{2\bullet}$ \\ \hline
+		Tổng cộng & $n_{\bullet 1}$ & $n_{\bullet 2}$  & $n$ \\ \hline
+	\end{tabular}
+	\caption{Ma trận lỗi theo tần số.}
+	\label{tab:MaTranLoiTanSo}
+\end{table}
+Ở đây,
+\begin{itemize}
+	\item $n$: cỡ mẫu;
+	\item $n_{ij}$: số quan sát được phân loại vào lớp $\hat{C}_i$ bởi phương pháp phân loại và thuộc lớp $C_j$ trong tập dữ liệu mẫu $(i,j=1,2)$;
+	\item $n_{i\bullet}$: số quan sát được phân loại vào lớp $\hat{C}_i$ trong tập dữ liệu mẫu $(i=1,2)$;
+	\item $n_{\bullet j}$: số quan sát thuộc lớp $C_j$ trong tập dữ liệu mẫu $(j=1,2)$.
+\end{itemize}
+Từ bảng trên, ta quan tâm đến các đại lượng đặc trưng cho độ chính xác như sau
+\begin{itemize}
+	\item Độ chính xác tổng thể của sự phân lớp (the overall accuracy) giữa dữ liệu được phân lớp từ phương pháp phân loại và dữ liệu tham chiếu, tức là tỷ lệ (xác suất) phân loại đúng của ánh xạ phân loại: 
+	\begin{equation}
+		\text{Overall Accuracy}=\frac{n_{11}+n_{22}}{n}.
+		\label{eq:OverallAccuracy}
+	\end{equation}
+	\item Độ chính xác của thủ tục phân loại (the Producer's accuracy | Recall) là tỷ lệ (xác suất) để thủ tục phân loại gán nhãn cho một quan trắc là $\hat{C}_j$, biết rằng lớp đúng của nó là $C_j$. Điều này được thể hiện qua số đo đặc trưng 
+	\begin{equation}
+		P(\hat{C}_j | C_j) = \frac{n_{jj}}{n_{\bullet j}},\quad j=1,2.
+		\label{eq:ProducerAccuracy}
+	\end{equation}
+	Trong mô hình Bayes đại lượng này chính là độ nhạy (sensitivity) và độ chuyên (specificity) của phương pháp.
+	\item Độ chính xác tiên đoán, hay tỷ lệ tiên đoán đúng (precision) nghĩa là tỷ lệ lớp đúng là $C_j$ biết rằng thủ tục phân loại gán nhãn là $\hat{C}_j$. Đại lượng này được thể hiện qua số đo đặc trưng
+	\begin{equation}
+		P(C_j | \hat{C}_j)=\frac{n_{jj}}{n_{j\bullet}},\quad j=1,2.
+		\label{eq:Precision}
+	\end{equation}
+	Trong mô hình Bayes, đại lượng này chính là tỷ lệ tiên đoán dương (Positive predictive Rate) và tỷ lệ tiên đoán âm (Negative Predictive Rate).
+\end{itemize}
+
+Từ ma trận xác suất lỗi, tỷ lệ  (xác suất) phân loại lỗi (Total probability of misclassification - TPM) của ánh xạ phân loại được cho bởi 
+\begin{equation*}
+	\text{TPM} = \frac{n_{12}+n_{21}}{n}.
+\end{equation*} Lưu ý, từ công thức \ref{eq:OverallAccuracy} cho độ chính xác tổng thể của sự phân lớp ta có 
+\begin{equation*}
+	\text{Overall Accuracy} + \text{TPM} = 1.
+\end{equation*} Sau cùng, từ Bảng \ref{tab:MaTranLoiTanSo}, ta thiết lập bảng liên quan đến các tỷ lệ (xác suất) được gọi là ma trận lỗi theo tỷ lệ, được cho ở Bảng \ref{tab:MaTranLoiTyLe}
+
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|cc|c|}
+		\hline
+		\multirow{2}{*}{Các lớp dự báo} & \multicolumn{2}{c|}{Các lớp đúng} & \multirow{2}{*}{Tổng cộng} \\ \cline{2-3}
+		& $C_1$ & $C_2$ & \\ \hline
+		$\hat{C}_1$ & $p_{11}$ & $p_{12}$ & $p_{1\bullet}$ \\
+		$\hat{C}_2$ & $p_{21}$ & $p_{22}$ & $p_{2\bullet}$ \\ \hline
+		Tổng cộng & $p_{\bullet 1}$ & $p_{\bullet 2}$  & $1,0$ \\ \hline
+	\end{tabular}
+	\caption{Ma trận lỗi theo tỷ lệ.}
+	\label{tab:MaTranLoiTyLe}
+\end{table}
+Trong đó, 
+\begin{itemize}
+	\item $p_{ij}=\frac{n_{ij}}{n}$: tỷ lệ quan sát được phân loại vào lớp $\hat{C}_i$ bởi phương pháp phân loại và thuộc lớp $C_j$ trong tập dữ liệu mẫu;
+	\item $p_{i\bullet}$: tỷ lệ các quan sát được phân loại vào lớp $\hat{C}_i$ trong tập dữ liệu mẫu;
+	\item $p_{\bullet j}$: tỷ lệ các quan sát thuộc lớp $C_j$ trong tập dữ liệu mẫu.
+\end{itemize}
+với, $i,j=1,2$.
